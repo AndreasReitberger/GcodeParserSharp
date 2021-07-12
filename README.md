@@ -8,10 +8,26 @@ License: https://github.com/hudbrog/gCodeViewer/blob/master/LICENSE (https://cre
 # Usage
 You can use the `GcodeParser.Instance` to parse any gcode file.
 ```csharp
-var prog = new Progress<int>(percent =>
+
+public async Task ParseGcodeAsync()
 {
-    gc.Progress = percent;
-});
-string filePath = "your.gcode";
-Gcode gcode = await GcodeParser.Instance.FromFileAsync(filePath, prog, cts.Token, true);
+    public string testfile = @"Gcodes\Test.gcode";
+    var prog = new Progress<int>(percent =>
+    {
+        Console.WriteLine($"Parsed: {percent}%");
+    });
+    if (File.Exists(testfile))
+    {
+        CancellationTokenSource cts = new CancellationTokenSource();
+        var gcode = await GcodeParser.Instance.FromFileAsync(testfile, prog, cts.Token, false);
+        if (gcode != null)
+        {
+            Console.WriteLine($"Gcode parsed in: {gcode.ParsingDuration}");
+        }
+        else
+            Assert.Fail($"Parsed gcoe was null: {testfile}");
+    }
+    else
+        Assert.Fail($"{testfile} not found!");
+}
 ```
