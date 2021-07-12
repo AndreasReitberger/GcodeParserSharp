@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GcodeParserSharp", "GcodeParserSharp\GcodeParserSharp.csproj", "{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GcodeParserSharp.Test", "GcodeParserSharp.Test\GcodeParserSharp.Test.csproj", "{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {583687D8-8F24-4DB5-8CA2-8402938A7178}
+	EndGlobalSection
+EndGlobal
