@@ -10,13 +10,17 @@
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
     <PackageProjectUrl>https://github.com/AndreasReitberger/GcodeParserSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <LangVersion>9.0</LangVersion>
+    <RepositoryUrl>https://github.com/AndreasReitberger/GcodeParserSharp</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit" Version="2.17.0" />
     <PackageReference Include="HelixToolkit.Wpf" Version="2.17.0" Condition="$(TargetFramework.StartsWith('net4'))" />
     <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.17.0" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="OctoPrintSharpApi" Version="1.0.8" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.0.9" />
     <PackageReference Include="UtilitiesSharpLibrary" Version="1.0.0" />
   </ItemGroup>
 

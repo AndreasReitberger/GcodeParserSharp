@@ -21,14 +21,13 @@ namespace AndreasReitberger.Models
         }
         public override bool Equals(object obj)
         {
-            var item = obj as SlicerInfo;
-            if (item == null)
+            if (obj is not SlicerInfo item)
                 return false;
-            return this.Id.Equals(item.Id) || (this.SlicerName == item.SlicerName);
+            return Id.Equals(item.Id) || (this.SlicerName == item.SlicerName);
         }
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
         #endregion
     }

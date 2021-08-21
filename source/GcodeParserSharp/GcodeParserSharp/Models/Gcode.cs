@@ -103,7 +103,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        Dictionary<double, int> _zHeights = new Dictionary<double, int>();
+        Dictionary<double, int> _zHeights = new();
         public Dictionary<double, int> ZHeights
         {
             get => _zHeights;
@@ -165,7 +165,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<double> _filamentUsage = new List<double>();
+        List<double> _filamentUsage = new();
         public List<double> FilamentUsage
         {
             get => _filamentUsage;
@@ -177,7 +177,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<double> _filamentDiameters = new List<double>();
+        List<double> _filamentDiameters = new();
         public List<double> FilamentDiameters
         {
             get => _filamentDiameters;
@@ -189,7 +189,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<double> _filamentDensities = new List<double>();
+        List<double> _filamentDensities = new();
         public List<double> FilamentDensities
         {
             get => _filamentDensities;
@@ -201,7 +201,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<double> _nozzleDiameters = new List<double>();
+        List<double> _nozzleDiameters = new();
         public List<double> NozzleDiameters
         {
             get => _nozzleDiameters;
@@ -369,7 +369,7 @@ namespace AndreasReitberger.Models
         #endregion
 
         #region Commands & Comments
-        List<List<GcodeCommandLine>> _commands = new List<List<GcodeCommandLine>>();
+        List<List<GcodeCommandLine>> _commands = new();
         public List<List<GcodeCommandLine>> Commands
         {
             get => _commands;
@@ -381,7 +381,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<string> _comments = new List<string>();
+        List<string> _comments = new();
         public List<string> Comments
         {
             get => _comments;
@@ -396,7 +396,7 @@ namespace AndreasReitberger.Models
 
 #if NETFRAMEWORK
         #region Model
-        List<LinesVisual3D> _modelLayers = new List<LinesVisual3D>();
+        List<LinesVisual3D> _modelLayers = new();
         public List<LinesVisual3D> ModelLayers
         {
             get => _modelLayers;
@@ -408,7 +408,7 @@ namespace AndreasReitberger.Models
             }
         }
 
-        List<LineBuilder> _model3d = new List<LineBuilder>();
+        List<LineBuilder> _model3d = new();
         public List<LineBuilder> Model3D
         {
             get => _model3d;
@@ -462,18 +462,17 @@ namespace AndreasReitberger.Models
         #region Overrides
         public override string ToString()
         {
-            return this.FileName;
+            return FileName;
         }
         public override bool Equals(object obj)
         {
-            var item = obj as Gcode;
-            if (item == null)
+            if (obj is not Gcode item)
                 return false;
-            return this.Id.Equals(item.Id);
+            return Id.Equals(item.Id);
         }
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
         #endregion
     }

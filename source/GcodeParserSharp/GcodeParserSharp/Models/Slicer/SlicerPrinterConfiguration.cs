@@ -3,7 +3,7 @@
     public class SlicerPrinterConfiguration
     {
         #region  Default
-        public static SlicerPrinterConfiguration Default = new SlicerPrinterConfiguration()
+        public static SlicerPrinterConfiguration Default = new()
         {
             PrinterName = "Default",
             AMax_xy = 1000,
@@ -14,6 +14,7 @@
             PrintDurationCorrection = 1
         };
         #endregion
+
         #region Properties
 
         public string PrinterName { get; set; } 
@@ -30,14 +31,13 @@
 
         public override bool Equals(object obj)
         {
-            var item = obj as SlicerPrinterConfiguration;
-            if (item == null)
+            if (obj is not SlicerPrinterConfiguration item)
                 return false;
-            return this.PrinterName.Equals(item.PrinterName);
+            return PrinterName.Equals(item.PrinterName);
         }
         public override int GetHashCode()
         {
-            return this.PrinterName.GetHashCode();
+            return PrinterName.GetHashCode();
         }
 
         #endregion

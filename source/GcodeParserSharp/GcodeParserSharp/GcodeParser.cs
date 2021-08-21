@@ -18,7 +18,7 @@ namespace AndreasReitberger
     {
         #region Instance
         static GcodeParser _instance = null;
-        static readonly object Lock = new object();
+        static readonly object Lock = new();
         public static GcodeParser Instance
         {
             get
@@ -68,7 +68,7 @@ namespace AndreasReitberger
             }
         }
 
-        List<SlicerInfo> _supportedSlicers = new List<SlicerInfo>();
+        List<SlicerInfo> _supportedSlicers = new();
         public List<SlicerInfo> SupportedSlicers
         {
             get => _supportedSlicers;
@@ -93,10 +93,26 @@ namespace AndreasReitberger
         }
         #endregion
 
+        #region EventHandlers
+        public event EventHandler Error;
+        protected virtual void OnError()
+        {
+            Error?.Invoke(this, EventArgs.Empty);
+        }
+        protected virtual void OnError(ErrorEventArgs e)
+        {
+            Error?.Invoke(this, e);
+        }
+        protected virtual void OnError(UnhandledExceptionEventArgs e)
+        {
+            Error?.Invoke(this, e);
+        }
+        #endregion
+
         #region Constructor
         public GcodeParser() 
         {
-            Config = new SlicerPrinterConfiguration();
+            Config = SlicerPrinterConfiguration.Default;
             SupportedSlicers = GcodeParserGloblStaticConfig.SupportedSlicersForCommentRead;
         }
         public GcodeParser(SlicerPrinterConfiguration config)
@@ -131,8 +147,8 @@ namespace AndreasReitberger
                 return temp;
             }
 
-            var volume = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Volume), 2);
-            var length = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Length), 2);
+            double volume = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Volume), 2);
+            double length = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Length), 2);
 
             temp.Width = (float)Math.Round(file.GcodeAnalysis.Dimensions.Width, 2);
             temp.Height = (float)Math.Round(file.GcodeAnalysis.Dimensions.Height, 2);
@@ -158,7 +174,7 @@ namespace AndreasReitberger
         public string CommandsToText(Gcode gcode)
         {
             var cmds = gcode.Commands;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for (int i = 0; i < cmds.Count; i++)
             {
                 var list = cmds[i];
@@ -182,15 +198,8 @@ namespace AndreasReitberger
                 gcode.IsWorking = true;
                 TimeSpan start = DateTime.Now.TimeOfDay;
                 var progress = prog;
-                /*
-                Dictionary<int, int> overallProgress = new Dictionary<int, int>()
-                {
-                    {0, 0 },  // File reading
-                    {1, 0 },  // Parsing
-                    {2, 0 },  // Analyzing
-                };
-                */
-                Dictionary<int, int> overallProgress = new Dictionary<int, int>()
+
+                Dictionary<int, int> overallProgress = new()
                 {
                     {0, 0 },  // File reading & Parsing
                     {2, 0 },  // Analyzing
@@ -198,71 +207,19 @@ namespace AndreasReitberger
 
                 gcode.IsValid = false;
 
-                //long totalBytes = 0;
+                List<List<GcodeCommandLine>> commands = new();
+                List<string> comments = new();
+                Dictionary<double, int> zHeights = new();
 
-                //var lines = new List<string>();
-                var commands = new List<List<GcodeCommandLine>>();
-                var comments = new List<string>();
-                Dictionary<double, int> zHeights = new Dictionary<double, int>();
-
-                GcodeLineProcessResult result = new GcodeLineProcessResult();
-                // Working but reading and parsing is now combined (saves time)
-                /* 
+                GcodeLineProcessResult result = new();
                 using (FileStream fs = File.Open(gcode.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (BufferedStream bs = new BufferedStream(fs))
-                using (StreamReader sr = new StreamReader(bs))
-                {
-                    long totalBytes = bs.Length;
-                    long doneBytes = 0;
-                    string line;
-                    while ((line = await sr.ReadLineAsync()) != null)
-                    {
-                        if (!string.IsNullOrEmpty(line) && !line.Trim().StartsWith(";"))
-                            lines.Add(line);
-                            //lines.Push(line);
-                        else
-                            comments.Add(line);
-
-                        // Report current progress
-                        doneBytes += (sr.CurrentEncoding.GetBytes(line).Length);
-                        double currentProgress = (((double)doneBytes / (double)totalBytes) * 100f);
-                        int roundedProgress = Convert.ToInt32(currentProgress);
-
-                        bool report = false;
-                        if (doneBytes < totalBytes)
-                        {
-                            // Only update if needed
-                            if (overallProgress.ContainsKey(0) && overallProgress[0] < roundedProgress)
-                            {
-                                Console.WriteLine($"Update progress: {roundedProgress}");
-                                overallProgress[0] = roundedProgress;
-                                report = true;   
-                            }
-                        }
-                        else
-                        {
-                            report = true;
-                            overallProgress[0] = 100; 
-                        }
-                        if(report && prog != null)
-                        {
-                            var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
-                            prog.Report(completeProgress);
-                        }
-
-
-                    }
-                }
-                overallProgress[0] = 100;
-                */
-                using (FileStream fs = File.Open(gcode.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (BufferedStream bs = new BufferedStream(fs))
-                using (StreamReader sr = new StreamReader(bs))
+                using (BufferedStream bs = new(fs))
+                using (StreamReader sr = new(bs))
                 {
                     long totalBytes = bs.Length;
                     long doneBytes = 0;
 
-                    Dictionary<string, double> PreviousExtrusion = new Dictionary<string, double>()
+                    Dictionary<string, double> PreviousExtrusion = new()
                     {
                         {"a", 0 },
                         {"b", 0 },
@@ -270,7 +227,7 @@ namespace AndreasReitberger
                         {"e", 0 },
                         {"abs", 0 },
                     };
-                    Dictionary<string, double> PreviousRetraction = new Dictionary<string, double>()
+                    Dictionary<string, double> PreviousRetraction = new()
                     {
                         {"a", 0 },
                         {"b", 0 },
@@ -293,119 +250,19 @@ namespace AndreasReitberger
                     int layer = 0;
 
                     string line;
-                    GcodeCommandLine cmd = new GcodeCommandLine();
+                    GcodeCommandLine cmd = new();
                     while ((line = await sr.ReadLineAsync()) != null)
                     {
-                        
-                        if (!string.IsNullOrEmpty(line) && !line.Trim().StartsWith(";"))
+                        try
                         {
-                            if (line.StartsWith("G1"))
+                            if (!string.IsNullOrEmpty(line) && !line.Trim().StartsWith(";"))
                             {
-
-                            }
-                                
-                            AppendGcodeCommand(line,
-                                ref cmd,
-                                ref PreviousExtrusion,
-                                ref PreviousRetraction,
-                                ref zHeights,
-                                ref previousX,
-                                ref previousY,
-                                ref previousZ,
-                                ref lastSpeed,
-                                ref retract,
-                                ref extrusion,
-                                ref extruder,
-                                ref extruding,
-                                ref extrudeRelative,
-                                ref dcExtrude,
-                                ref assumeNonDC,
-                                ref layer,
-                                commands.Count);
-                            if (cmd.IsComplete)
-                            {
-                                // Ensure that the list is not null
-                                if (commands.Count == 0 || commands.Count - 1 < layer || commands[layer] == null)
+                                if (line.StartsWith("G1"))
                                 {
-                                    commands.Add(new List<GcodeCommandLine>());
+
                                 }
-                                commands[layer].Add(cmd);
-                                cmd = new GcodeCommandLine() { };
-                            }
-                                
-                        }
-                        else
-                            comments.Add(line);
 
-                        // Report current progress
-                        doneBytes += (sr.CurrentEncoding.GetBytes(line).Length);
-                        double currentProgress = (((double)doneBytes / (double)totalBytes) * 100f);
-                        int roundedProgress = Convert.ToInt32(currentProgress);
-
-                        bool report = false;
-                        if (doneBytes < totalBytes)
-                        {
-                            // Only update if needed
-                            if (overallProgress.ContainsKey(0) && overallProgress[0] < roundedProgress)
-                            {
-                                Console.WriteLine($"Update progress: {roundedProgress}");
-                                overallProgress[0] = roundedProgress;
-                                report = true;
-                            }
-                        }
-                        else
-                        {
-                            report = true;
-                            overallProgress[0] = 100;
-                        }
-                        if (report && prog != null)
-                        {
-                            var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
-                            prog.Report(completeProgress);
-                        }
-                    }
-                }
-
-                overallProgress[0] = 100;
-                // Working, but directly included in the reading operation
-                /*
-                GcodeCommandLine cmd = new GcodeCommandLine();
-                Dictionary<string, double> PreviousExtrusion = new Dictionary<string, double>()
-                        {
-                            {"a", 0 },
-                            {"b", 0 },
-                            {"c", 0 },
-                            {"e", 0 },
-                            {"abs", 0 },
-                        };
-                Dictionary<string, double> PreviousRetraction = new Dictionary<string, double>()
-                        {
-                            {"a", 0 },
-                            {"b", 0 },
-                            {"c", 0 },
-                            {"e", 0 },
-                            {"abs", 0 },
-                        };
-
-                double previousX = double.NegativeInfinity;
-                double previousY = double.NegativeInfinity;
-                double previousZ = double.NegativeInfinity;
-                double extrusion = 0;
-                double lastSpeed = 4000;
-                string extruder = string.Empty;
-                bool dcExtrude = false;
-                bool assumeNonDC = false;
-                int retract = 0;
-                bool extruding = false;
-                bool extrudeRelative = false;
-                int layer = 0;
-
-                // Process lines 
-                // Parse
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    string gcodeLine = lines[i];
-                    AppendGcodeCommand(gcodeLine,
+                                AppendGcodeCommand(line,
                                     ref cmd,
                                     ref PreviousExtrusion,
                                     ref PreviousRetraction,
@@ -423,43 +280,58 @@ namespace AndreasReitberger
                                     ref assumeNonDC,
                                     ref layer,
                                     commands.Count);
-                    if (cmd.IsComplete)
-                    {
-                        // Ensure that the list is not null
-                        if (commands.Count == 0 || commands.Count - 1 < layer || commands[layer] == null)
-                        {
-                            commands.Add(new List<GcodeCommandLine>());
-                        }
-                        commands[layer].Add(cmd);
-                        cmd = new GcodeCommandLine() { };
-                    }
+                                if (cmd.IsComplete)
+                                {
+                                    // Ensure that the list is not null
+                                    if (commands.Count == 0 || commands.Count - 1 < layer || commands[layer] == null)
+                                    {
+                                        commands.Add(new List<GcodeCommandLine>());
+                                    }
+                                    commands[layer].Add(cmd);
+                                    cmd = new GcodeCommandLine() { };
+                                }
 
-                    // Report current progress
-                    double currentProgress = (((double)i / (double)lines.Count) * 100f);
-                    int roundedProgress = Convert.ToInt32(currentProgress);
-                    bool report = false;
-                    if (i < lines.Count)
-                    {
-                        // Only update if needed
-                        if (overallProgress.ContainsKey(1) && overallProgress[1] < roundedProgress)
-                        {
-                            Console.WriteLine($"Update progress: {roundedProgress}");
-                            overallProgress[1] = roundedProgress;
-                            report = true;
+                            }
+                            else
+                                comments.Add(line);
+
+                            // Report current progress
+                            doneBytes += (sr.CurrentEncoding.GetBytes(line).Length);
+                            double currentProgress = (doneBytes / (double)totalBytes) * 100f;
+                            int roundedProgress = Convert.ToInt32(currentProgress);
+
+                            bool report = false;
+                            if (doneBytes < totalBytes)
+                            {
+                                // Only update if needed
+                                if (overallProgress.ContainsKey(0) && overallProgress[0] < roundedProgress)
+                                {
+                                    Console.WriteLine($"Update progress: {roundedProgress}");
+                                    overallProgress[0] = roundedProgress;
+                                    report = true;
+                                }
+                            }
+                            else
+                            {
+                                report = true;
+                                overallProgress[0] = 100;
+                            }
+                            if (report && prog != null)
+                            {
+                                var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
+                                prog.Report(completeProgress);
+                            }
                         }
-                    }
-                    else
-                    {
-                        report = true;
-                        overallProgress[1] = 100;
-                    }
-                    if (report && prog != null)
-                    {
-                        var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
-                        prog.Report(completeProgress);
+                        catch(Exception exc)
+                        {
+                            OnError(new UnhandledExceptionEventArgs(exc, false));
+                            continue;
+                        }
                     }
                 }
-                */
+
+                overallProgress[0] = 100;
+
                 // Analyze
                 for (int i = 0; i < commands.Count; i++)
                 {
@@ -499,7 +371,7 @@ namespace AndreasReitberger
                 }
 
                 gcode.SlicerName = GetSlicerNameFromLines(comments.Take(30).ToList());
-                var slicers = SupportedSlicers?.FirstOrDefault(slicer => slicer.SlicerName == gcode.SlicerName);
+                SlicerInfo slicers = SupportedSlicers?.FirstOrDefault(slicer => slicer.SlicerName == gcode.SlicerName);
 
                 // 29708.853619192618
                 gcode.Comments = new List<string>(comments);
@@ -521,10 +393,10 @@ namespace AndreasReitberger
                     // PrintTime
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.PrintTime, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.PrintTime, comments);
                         if (parameter != "unkown_parameter")
                         {
-                            var value = Convert.ToDouble(ConvertPrintTimeToDec(
+                            double value = Convert.ToDouble(ConvertPrintTimeToDec(
                                 parameter),
                                 parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                             if (value != -1)
@@ -538,25 +410,25 @@ namespace AndreasReitberger
                     // Filament Diameter
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentDiameter, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentDiameter, comments);
                         if (parameter != "unkown_parameter")
                         {
                             if (parameter.Contains("|"))
                             {
-                                var parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                                 gcode.FilamentDiameters.AddRange(
                                     parts.Select(part => Convert.ToDouble(part,
                                     part.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"))));
                             }
                             else
                             {
-                                var value = Convert.ToDouble(parameter,
+                                double value = Convert.ToDouble(parameter,
                                     parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                                 if (value != -1)
                                 {
                                     gcode.FilamentDiameter = Convert.ToDouble(GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentDiameter, comments), CultureInfo.GetCultureInfo("en-US"));
 
-                                    gcode.FilamentDiameters = new List<double>();
+                                    gcode.FilamentDiameters = new();
                                     gcode.FilamentDiameters.Add(gcode.FilamentDiameter);
                                 }
                             }
@@ -569,25 +441,27 @@ namespace AndreasReitberger
                     // Nozzle Diameter
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.NozzleDiameter, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.NozzleDiameter, comments);
                         if (parameter != "unkown_parameter")
                         {
                             if (parameter.Contains("|"))
                             {
-                                var parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                                 gcode.NozzleDiameters.AddRange(
                                     parts.Select(part => Convert.ToDouble(part,
                                     part.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"))));
                             }
                             else
                             {
-                                var value = Convert.ToDouble(parameter,
+                                double value = Convert.ToDouble(parameter,
                                     parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                                 if (value != -1)
                                 {
                                     gcode.NozzleDiameter = value;
-                                    gcode.NozzleDiameters = new List<double>();
-                                    gcode.NozzleDiameters.Add(gcode.NozzleDiameter);
+                                    gcode.NozzleDiameters = new List<double>
+                                    {
+                                        gcode.NozzleDiameter
+                                    };
                                 }
                             }
                         }
@@ -599,7 +473,7 @@ namespace AndreasReitberger
                     // FilamentType
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentType, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentType, comments);
                         if (parameter != "unkown_parameter")
                         {
                             gcode.FilamentType = parameter;
@@ -614,26 +488,28 @@ namespace AndreasReitberger
                     // FilamentDensity
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentDensity, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentDensity, comments);
                         if (parameter != "unkown_parameter")
                         {
                             if (parameter.Contains("|"))
                             {
-                                var parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                                 gcode.FilamentDensities.AddRange(
                                     parts.Select(part => Convert.ToDouble(part,
                                     part.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"))));
                             }
                             else
                             {
-                                var value = Convert.ToDouble(parameter,
+                                double value = Convert.ToDouble(parameter,
                                     parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                                 if (value != -1)
                                 {
                                     gcode.FilamentDensity = value;
 
-                                    gcode.FilamentDensities = new List<double>();
-                                    gcode.FilamentDensities.Add(gcode.FilamentDensity);
+                                    gcode.FilamentDensities = new List<double>
+                                    {
+                                        gcode.FilamentDensity
+                                    };
                                 }
                             }
                         }
@@ -650,21 +526,23 @@ namespace AndreasReitberger
                         {
                             if (parameter.Contains("|"))
                             {
-                                var parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
                                 gcode.FilamentUsage.AddRange(
                                     parts.Select(part => Convert.ToDouble(part,
                                     part.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"))));
                             }
                             else
                             {
-                                var value = Convert.ToDouble(parameter,
+                                double value = Convert.ToDouble(parameter,
                                     parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                                 if (value != -1)
                                 {
                                     gcode.FilamentUsed = Math.Round(value, 2);
 
-                                    gcode.FilamentUsage = new List<double>();
-                                    gcode.FilamentUsage.Add(gcode.FilamentUsed);
+                                    gcode.FilamentUsage = new List<double>
+                                    {
+                                        gcode.FilamentUsed
+                                    };
                                 }
                             }
                         }
@@ -676,10 +554,10 @@ namespace AndreasReitberger
                     // Volume
                     try
                     {
-                        var parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.Volume, comments);
+                        string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.Volume, comments);
                         if (parameter != "unkown_parameter")
                         {
-                            var value = Convert.ToDouble(parameter,
+                            double value = Convert.ToDouble(parameter,
                                 parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
                             if (value != -1)
                                 gcode.ExtrudedFilamentVolume = Math.Round(value, 2);
@@ -715,23 +593,19 @@ namespace AndreasReitberger
 
                 TimeSpan end = DateTime.Now.TimeOfDay;
                 gcode.ParsingDuration = LastParsingDuration = end - start;
-                // 1) 00:00:04.6708518 (without reporting)
-                // 2) 00:00:07.8309483 (with decent reporting)
-                // 3) 00:00:05.2924386 (with decent reporting and reading + parsing combined in one loop)
+
                 gcode.IsWorking = false;
 
-                //lines.Clear();
                 commands.Clear();
                 comments.Clear();
-
-                //lines = null;
                 commands = null;
                 comments = null;
 
                 return gcode;
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                OnError(new UnhandledExceptionEventArgs(exc, false));
                 gcode.IsWorking = false;
                 return null;
             }
@@ -1118,8 +992,8 @@ namespace AndreasReitberger
             {
                 // Calculate time for z movements
                 result.ValidZ = true;
-                var s = (double)(command.Z - command.PrevZ);
-                var temp = CalculateTime(s, command.Speed / speedDivider, Config.AMax_z);
+                double s = (double)(command.Z - command.PrevZ);
+                double temp = CalculateTime(s, command.Speed / speedDivider, Config.AMax_z);
                 //var temp = s / command.Speed / speedDivider;
                 if (double.IsNaN(temp) || double.IsInfinity(temp))
                 {
@@ -1153,9 +1027,9 @@ namespace AndreasReitberger
             if (result.ValidX && result.ValidY)
             {
                 // distance to travel in mm
-                var s = (double)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
+                double s = (double)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
 
-                var temp = CalculateTime(s, command.Speed / speedDivider, Config.AMax_xy);
+                double temp = CalculateTime(s, command.Speed / speedDivider, Config.AMax_xy);
                 if (double.IsNaN(temp) || double.IsInfinity(temp))
                 {
 
@@ -1167,7 +1041,7 @@ namespace AndreasReitberger
             else if (command.Retract == 0 && command.Extrusion != 0)
             {
 
-                var s = (double)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
+                double s = (double)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
                 tmp1 = CalculateTime(s, command.Speed / speedDivider, Config.AMax_e);
 
                 tmp2 = CalculateTime(Math.Abs(command.Extrusion), command.Speed / speedDivider, Config.AMax_eExtrude);
@@ -1198,7 +1072,7 @@ namespace AndreasReitberger
             // Calculate time for retract
             else if (command.Retract != 0)
             {
-                var s = (float)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
+                double s = (double)Math.Sqrt(Math.Pow((command.X) - (command.PrevX), 2) + Math.Pow((command.Y) - (command.PrevY), 2));
                 tmp1 = CalculateTime(s, command.Speed / speedDivider, Config.AMax_e);
                 //tmp2 = Math.Abs(command.Extrusion / (command.Speed / speedDivider));
                 tmp2 = CalculateTime(Math.Abs(command.Extrusion), command.Speed / speedDivider, Config.AMax_eRetract);
@@ -1239,10 +1113,10 @@ namespace AndreasReitberger
             double temp = 0;
             if (distance == 0) return temp;
 
-            var tAcceleration = speed / maxAcceleration;
-            var sAcceleration = (double)((maxAcceleration / 2) * Math.Pow(tAcceleration, 2));
+            double tAcceleration = speed / maxAcceleration;
+            double sAcceleration = (double)((maxAcceleration / 2) * Math.Pow(tAcceleration, 2));
 
-            var tConstant = (double)((distance - sAcceleration) / speed);
+            double tConstant = (double)((distance - sAcceleration) / speed);
             temp = tConstant > 0 ? tAcceleration + tConstant : (double)Math.Sqrt(2 * distance / maxAcceleration);
             return temp;
         }
@@ -1256,7 +1130,7 @@ namespace AndreasReitberger
             else if (Regex.IsMatch(printTime, @"(\d+:\d+:\d+:\d+)"))
             {
                 string[] time = printTime.Split(':');
-                TimeSpan ts = new TimeSpan(
+                TimeSpan ts = new(
                     Convert.ToInt32(time[0]),   // days
                     Convert.ToInt32(time[1]),   // hours
                     Convert.ToInt32(time[2]),   // minutes
@@ -1266,7 +1140,7 @@ namespace AndreasReitberger
             else
             {
                 string[] time = printTime.Split(' ');
-                string timestring = string.Empty;
+                string timestring;
                 if (time.Contains("hour") || time.Contains("hours")
                     || time.Contains("minutes") || time.Contains("minute")
                     || time.Contains("seconds") || time.Contains("second")
@@ -1292,40 +1166,31 @@ namespace AndreasReitberger
                 }
                 else
                 {
-                    switch (time.Count())
+                    timestring = time.Count() switch
                     {
-                        case 4:
-                            timestring = string.Format("{0}:{1}:{2}:{3}",
-                            time[0].Replace("d", string.Empty),
-                            time[1].Replace("h", string.Empty),
-                            time[2].Replace("m", string.Empty),
-                            time[3].Replace("s", string.Empty)
-                            );
-                            break;
-                        case 3:
-                            timestring = string.Format("{0}:{1}:{2}",
-                            time[0].Replace("h", string.Empty),
-                            time[1].Replace("m", string.Empty),
-                            time[2].Replace("s", string.Empty)
-                            );
-                            break;
-                        case 2:
-                            timestring = string.Format("{0}:{1}:{2}",
-                            "0",
-                            time[0].Replace("m", string.Empty),
-                            time[1].Replace("s", string.Empty)
-                            );
-                            break;
-                        case 1:
-                            timestring = string.Format("{0}:{1}:{2}",
-                            "0",
-                            "0",
-                            time[0].Replace("s", string.Empty)
-                            );
-                            break;
-                        default:
-                            throw new Exception(string.Format("Unknown time string format: {0}", printTime));
-                    }
+                        4 => string.Format("{0}:{1}:{2}:{3}",
+                                time[0].Replace("d", string.Empty),
+                                time[1].Replace("h", string.Empty),
+                                time[2].Replace("m", string.Empty),
+                                time[3].Replace("s", string.Empty)
+                                ),
+                        3 => string.Format("{0}:{1}:{2}",
+                                time[0].Replace("h", string.Empty),
+                                time[1].Replace("m", string.Empty),
+                                time[2].Replace("s", string.Empty)
+                                ),
+                        2 => string.Format("{0}:{1}:{2}",
+                                "0",
+                                time[0].Replace("m", string.Empty),
+                                time[1].Replace("s", string.Empty)
+                                ),
+                        1 => string.Format("{0}:{1}:{2}",
+                              "0",
+                              "0",
+                      time[0].Replace("s", string.Empty)
+                      ),
+                        _ => throw new Exception(string.Format("Unknown time string format: {0}", printTime)),
+                    };
                 }
                 TimeSpan dt = TimeSpan.Parse(timestring);
                 return Convert.ToDecimal(dt.TotalHours);
@@ -1373,7 +1238,7 @@ namespace AndreasReitberger
             try
             {
                 Regex myregex;
-                List<string> lines = new List<string>();
+                List<string> lines = new();
                 string unknown = "unkown_parameter";
                 switch (Slicer)
                 {
@@ -1486,10 +1351,10 @@ namespace AndreasReitberger
                         }
                     // Voxelizer 2
                     case SlicerName.Voxelizer2:                      
-                        VoxelizerSingleGcodeInfo gInfo = new VoxelizerSingleGcodeInfo();
+                        VoxelizerSingleGcodeInfo gInfo = new();
                         try
                         {
-                            StringBuilder sb = new StringBuilder();
+                            StringBuilder sb = new();
                             for (int i = 1; i < Lines.Count; i++)
                             {
                                 string curLine = Lines[i];
@@ -1616,13 +1481,12 @@ namespace AndreasReitberger
                                 myregex = new Regex(@"[;]Filament Density #\d:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
 
-                                List<double> filamentDensity = new List<double>();
+                                List<double> filamentDensity = new();
                                 foreach (string line in lines)
                                 {
                                     var s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
-                                    double density = 0;
                                     // Check if it's a valid double format
-                                    if (Double.TryParse(s, out density))
+                                    if (Double.TryParse(s, out double density))
                                     {
                                         density = Convert.ToDouble(s, CultureInfo.GetCultureInfo("en-US"));
                                         // Densitiy is in kg
@@ -1636,13 +1500,12 @@ namespace AndreasReitberger
                                 myregex = new Regex(@"[;]Filament Diameter #\d:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
 
-                                List<double> filamentDiameter = new List<double>();
+                                List<double> filamentDiameter = new();
                                 foreach (string line in lines)
                                 {
-                                    var s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
-                                    double diameter = 1.75;
+                                    string s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
                                     // Check if it's a valid double format
-                                    if (Double.TryParse(s, out diameter))
+                                    if (Double.TryParse(s, out double diameter))
                                     {
                                         diameter = Convert.ToDouble(s, CultureInfo.GetCultureInfo("en-US"));
                                         filamentDiameter.Add(diameter);
@@ -1676,31 +1539,31 @@ namespace AndreasReitberger
                                 myregex = new Regex(@"[;]Filament used:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
 
-                                List<double> filamentLength = new List<double>();
+                                List<double> filamentLength = new();
                                 foreach (string line in lines)
                                 {
-                                    var s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
-                                    var unit = Regex.Match(line, @"(\b(\d+(?:\.\d+)?)\s*([cmk]?m)\b)").Groups;
-                                    var stringUnit = unit[unit.Count - 1].Value;
-                                    double filament = 0;
+                                    string s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
+                                    GroupCollection unit = Regex.Match(line, @"(\b(\d+(?:\.\d+)?)\s*([cmk]?m)\b)").Groups;
+                                    string stringUnit = unit[groupnum: unit.Count - 1].Value;
+                                    //string stringUnit = unit[unit.Count - 1].Value;
                                     // Check if it's a valid double format
-                                    if (Double.TryParse(s, out filament))
+                                    if (Double.TryParse(s, out double filament))
                                     {
                                         // Filament is al
                                         filament = Convert.ToDouble(s, CultureInfo.GetCultureInfo("en-US"));
-                                        switch(stringUnit)
+                                        switch (stringUnit)
                                         {
                                             case "cm":
-                                                filament = filament * 100;
-                                                break;
-                                            case "mm":
-                                                filament = filament * 1000;
+                                                filament *= 10;
                                                 break;
                                             case "km":
-                                                filament = filament / 1000;
+                                                filament = filament * 1000 * 100 * 10;
+                                                break;
+                                            case "m":
+                                                filament = filament * 100 * 10;
                                                 break;
                                             // Nothing to do here, already in meters
-                                            case "m":
+                                            case "mm":
                                             default:
                                                 break;
                                         }
@@ -1713,13 +1576,17 @@ namespace AndreasReitberger
                             default:
                                 return unknown;
                         }
+                    case SlicerName.FlashForge:
+                        // No print infos in comments available
+                        return unknown;
                     default:
                         return "Slicer not tested yet";
                 }
 
             }
-            catch (Exception)
+            catch (Exception exc)
             {
+                OnError(new UnhandledExceptionEventArgs(exc, false));
                 return "Error";
             }
 
