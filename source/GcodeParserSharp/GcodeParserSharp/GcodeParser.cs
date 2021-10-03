@@ -1123,7 +1123,8 @@ namespace AndreasReitberger
         decimal ConvertPrintTimeToDec(string printTime)
         {
             // If already passed as double string
-            if (Regex.IsMatch(printTime, @"(\d+(\.\d+)?)|(\.\d+)"))
+            //if (Regex.IsMatch(printTime, @"(\d+(\.\d+)?)|(\.\d+)"))
+            if (Regex.IsMatch(printTime, @"^((\d+(\.\d+)?)|(\.\d+))$"))
             {
                 return Convert.ToDecimal(printTime);
             }
@@ -1523,7 +1524,7 @@ namespace AndreasReitberger
                             case SlicerParameter.PrintTime:
                                 myregex = new Regex(@"([;]TIME:\d*)");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
-                                var s2 = Regex.Match(lines[0], @"(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
+                                string s2 = Regex.Match(lines[0], @"(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
                                 double printT = 0;
                                 // Check if it's a valid double format
                                 if (Double.TryParse(s2, out printT))

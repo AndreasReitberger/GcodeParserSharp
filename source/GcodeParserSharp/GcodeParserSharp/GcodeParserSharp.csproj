@@ -10,8 +10,8 @@
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
     <PackageProjectUrl>https://github.com/AndreasReitberger/GcodeParserSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
     <LangVersion>9.0</LangVersion>
     <RepositoryUrl>https://github.com/AndreasReitberger/GcodeParserSharp</RepositoryUrl>
   </PropertyGroup>

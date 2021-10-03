@@ -45,6 +45,8 @@ namespace GcodeParserSharp.Test
                     if (gcode != null)
                     {
                         Console.WriteLine($"Gcode parsed in: {gcode.ParsingDuration}");
+                        // Make sure that print time and volume is not 0 
+                        Assert.IsTrue(gcode.PrintTime > 0 && gcode.ExtrudedFilamentVolume > 0);
                     }
                     else
                         Assert.Fail($"Parsed gcoe was null: {file}");
