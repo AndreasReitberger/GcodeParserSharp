@@ -1,5 +1,5 @@
 ﻿using AndreasReitberger.Enums;
-using AndreasReitberger.Utilities;
+using AndreasReitberger.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;

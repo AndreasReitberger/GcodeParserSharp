@@ -14,9 +14,11 @@ namespace GcodeParserSharp.Test
     {
         public List<string> testfiles = new List<string>()
         {
+            @"Gcodes\Cura.gcode",
             @"Gcodes\PrusaSlicer.gcode",
             @"Gcodes\FlashForge.gcode",
             @"Gcodes\IdeaMaker.gcode",
+            @"Gcodes\Simplify3D.gcode",
         };
 
         [TestMethod]
@@ -31,6 +33,8 @@ namespace GcodeParserSharp.Test
                 new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.Cura },
                 new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.FlashForge },
                 new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.PrusaSlicer },
+                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.Simplify3D },
+                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.IdeaMaker },
             };
             GcodeParser.Instance.Error += (a, b) =>
             {

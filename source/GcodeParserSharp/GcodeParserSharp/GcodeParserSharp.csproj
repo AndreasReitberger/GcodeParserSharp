@@ -10,18 +10,19 @@
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
     <PackageProjectUrl>https://github.com/AndreasReitberger/GcodeParserSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.6</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
     <LangVersion>9.0</LangVersion>
     <RepositoryUrl>https://github.com/AndreasReitberger/GcodeParserSharp</RepositoryUrl>
+    <FileVersion>1.0.6.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HelixToolkit" Version="2.17.0" />
-    <PackageReference Include="HelixToolkit.Wpf" Version="2.17.0" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.17.0" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="OctoPrintSharpApi" Version="1.0.9" />
-    <PackageReference Include="UtilitiesSharpLibrary" Version="1.0.0" />
+    <PackageReference Include="HelixToolkit" Version="2.20.0" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.20.0" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.20.0" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.1.1" />
+    <PackageReference Include="RCoreSharp" Version="1.0.4" />
   </ItemGroup>
 
 </Project>

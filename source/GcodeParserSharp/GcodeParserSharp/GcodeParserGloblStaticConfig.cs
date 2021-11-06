@@ -6,7 +6,7 @@ namespace AndreasReitberger
 {
     public static class GcodeParserGloblStaticConfig
     {
-        public static List<SlicerInfo> SupportedSlicersForCommentRead = new List<SlicerInfo>()
+        public static List<SlicerInfo> SupportedSlicersForCommentRead = new()
         {
             new SlicerInfo() { SlicerName = SlicerName.Slic3r},
             new SlicerInfo() { SlicerName = SlicerName.PrusaSlicer},

@@ -1,0 +1,1362 @@
+Update progress: 1
+Parsed: 0%
+Update progress: 2
+Parsed: 1%
+Update progress: 3
+Parsed: 1%
+Update progress: 4
+Parsed: 2%
+Update progress: 5
+Parsed: 2%
+Update progress: 6
+Parsed: 3%
+Update progress: 7
+Parsed: 3%
+Update progress: 8
+Parsed: 4%
+Update progress: 9
+Parsed: 4%
+Update progress: 10
+Parsed: 5%
+Update progress: 11
+Parsed: 5%
+Update progress: 12
+Parsed: 6%
+Update progress: 13
+Parsed: 6%
+Update progress: 14
+Parsed: 7%
+Update progress: 15
+Parsed: 7%
+Update progress: 16
+Parsed: 8%
+Update progress: 17
+Parsed: 8%
+Update progress: 18
+Parsed: 9%
+Update progress: 19
+Parsed: 9%
+Update progress: 20
+Parsed: 10%
+Update progress: 21
+Parsed: 10%
+Update progress: 22
+Parsed: 11%
+Update progress: 23
+Parsed: 11%
+Update progress: 24
+Parsed: 12%
+Update progress: 25
+Parsed: 12%
+Update progress: 26
+Parsed: 13%
+Update progress: 27
+Parsed: 13%
+Update progress: 28
+Parsed: 14%
+Update progress: 29
+Parsed: 14%
+Update progress: 30
+Parsed: 15%
+Update progress: 31
+Parsed: 15%
+Update progress: 32
+Parsed: 16%
+Update progress: 33
+Parsed: 16%
+Update progress: 34
+Parsed: 17%
+Update progress: 35
+Parsed: 17%
+Update progress: 36
+Parsed: 18%
+Update progress: 37
+Parsed: 18%
+Update progress: 38
+Parsed: 19%
+Update progress: 39
+Parsed: 19%
+Update progress: 40
+Parsed: 20%
+Update progress: 41
+Parsed: 20%
+Update progress: 42
+Parsed: 21%
+Update progress: 43
+Parsed: 21%
+Update progress: 44
+Parsed: 22%
+Update progress: 45
+Parsed: 22%
+Update progress: 46
+Parsed: 23%
+Update progress: 47
+Parsed: 23%
+Update progress: 48
+Parsed: 24%
+Update progress: 49
+Parsed: 24%
+Update progress: 50
+Parsed: 25%
+Update progress: 51
+Parsed: 25%
+Update progress: 52
+Parsed: 26%
+Update progress: 53
+Parsed: 26%
+Update progress: 54
+Parsed: 27%
+Update progress: 55
+Parsed: 27%
+Update progress: 56
+Parsed: 28%
+Update progress: 57
+Parsed: 28%
+Update progress: 58
+Parsed: 29%
+Update progress: 59
+Parsed: 29%
+Update progress: 60
+Parsed: 30%
+Update progress: 61
+Parsed: 30%
+Update progress: 62
+Parsed: 31%
+Update progress: 63
+Parsed: 31%
+Update progress: 64
+Parsed: 32%
+Update progress: 65
+Parsed: 32%
+Update progress: 66
+Parsed: 33%
+Update progress: 67
+Parsed: 33%
+Update progress: 68
+Parsed: 34%
+Update progress: 69
+Parsed: 34%
+Update progress: 70
+Parsed: 35%
+Update progress: 71
+Parsed: 35%
+Update progress: 72
+Parsed: 36%
+Update progress: 73
+Parsed: 36%
+Update progress: 74
+Parsed: 37%
+Update progress: 75
+Parsed: 37%
+Update progress: 76
+Parsed: 38%
+Update progress: 77
+Parsed: 38%
+Update progress: 78
+Parsed: 39%
+Update progress: 79
+Parsed: 39%
+Update progress: 80
+Parsed: 40%
+Update progress: 81
+Parsed: 40%
+Update progress: 82
+Parsed: 41%
+Update progress: 83
+Parsed: 41%
+Update progress: 84
+Parsed: 42%
+Update progress: 85
+Parsed: 42%
+Update progress: 86
+Parsed: 43%
+Update progress: 87
+Parsed: 43%
+Update progress: 88
+Parsed: 44%
+Update progress: 89
+Parsed: 44%
+Update progress: 90
+Parsed: 45%
+Update progress: 91
+Parsed: 45%
+Update progress: 92
+Parsed: 46%
+Update progress: 93
+Parsed: 46%
+Update progress: 94
+Parsed: 47%
+Parsed: 50%
+Parsed: 51%
+Parsed: 51%
+Parsed: 52%
+Parsed: 52%
+Parsed: 53%
+Parsed: 53%
+Parsed: 54%
+Parsed: 54%
+Parsed: 55%
+Parsed: 55%
+Parsed: 56%
+Parsed: 56%
+Parsed: 57%
+Parsed: 57%
+Parsed: 58%
+Parsed: 58%
+Parsed: 59%
+Parsed: 59%
+Parsed: 60%
+Parsed: 60%
+Parsed: 61%
+Parsed: 61%
+Parsed: 62%
+Parsed: 62%
+Parsed: 63%
+Parsed: 63%
+Parsed: 64%
+Parsed: 64%
+Parsed: 65%
+Parsed: 65%
+Parsed: 66%
+Parsed: 66%
+Parsed: 67%
+Parsed: 67%
+Parsed: 68%
+Parsed: 68%
+Parsed: 69%
+Parsed: 69%
+Parsed: 70%
+Parsed: 70%
+Parsed: 71%
+Parsed: 71%
+Parsed: 72%
+Parsed: 72%
+Parsed: 73%
+Parsed: 73%
+Parsed: 74%
+Parsed: 74%
+Parsed: 75%
+Parsed: 75%
+Parsed: 76%
+Parsed: 76%
+Parsed: 77%
+Parsed: 77%
+Parsed: 78%
+Parsed: 78%
+Parsed: 79%
+Parsed: 79%
+Parsed: 80%
+Parsed: 80%
+Parsed: 81%
+Parsed: 81%
+Parsed: 82%
+Parsed: 82%
+Parsed: 83%
+Parsed: 83%
+Parsed: 84%
+Parsed: 84%
+Parsed: 85%
+Parsed: 85%
+Parsed: 86%
+Parsed: 86%
+Parsed: 87%
+Parsed: 87%
+Parsed: 88%
+Parsed: 88%
+Parsed: 89%
+Parsed: 89%
+Parsed: 90%
+Parsed: 90%
+Parsed: 91%
+Parsed: 91%
+Parsed: 92%
+Parsed: 92%
+Parsed: 93%
+Parsed: 93%
+Parsed: 94%
+Parsed: 94%
+Parsed: 95%
+Parsed: 95%
+Parsed: 96%
+Parsed: 96%
+Parsed: 97%
+Parsed: 97%
+Parsed: 98%
+Parsed: 98%
+Parsed: 99%
+Parsed: 99%
+Parsed: 100%
+Gcode parsed in: 00:00:01.8329167
+Update progress: 1
+Parsed: 0%
+Update progress: 2
+Parsed: 1%
+Update progress: 3
+Parsed: 1%
+Update progress: 4
+Parsed: 2%
+Update progress: 5
+Parsed: 2%
+Update progress: 6
+Parsed: 3%
+Update progress: 7
+Parsed: 3%
+Update progress: 8
+Parsed: 4%
+Update progress: 9
+Parsed: 4%
+Update progress: 10
+Parsed: 5%
+Update progress: 11
+Parsed: 5%
+Update progress: 12
+Parsed: 6%
+Update progress: 13
+Parsed: 6%
+Update progress: 14
+Parsed: 7%
+Update progress: 15
+Parsed: 7%
+Update progress: 16
+Parsed: 8%
+Update progress: 17
+Parsed: 8%
+Update progress: 18
+Parsed: 9%
+Update progress: 19
+Parsed: 9%
+Update progress: 20
+Parsed: 10%
+Update progress: 21
+Parsed: 10%
+Update progress: 22
+Parsed: 11%
+Update progress: 23
+Parsed: 11%
+Update progress: 24
+Parsed: 12%
+Update progress: 25
+Parsed: 12%
+Update progress: 26
+Parsed: 13%
+Update progress: 27
+Parsed: 13%
+Update progress: 28
+Parsed: 14%
+Update progress: 29
+Parsed: 14%
+Update progress: 30
+Parsed: 15%
+Update progress: 31
+Parsed: 15%
+Update progress: 32
+Parsed: 16%
+Update progress: 33
+Parsed: 16%
+Update progress: 34
+Parsed: 17%
+Update progress: 35
+Parsed: 17%
+Update progress: 36
+Parsed: 18%
+Update progress: 37
+Parsed: 18%
+Update progress: 38
+Parsed: 19%
+Update progress: 39
+Parsed: 19%
+Update progress: 40
+Parsed: 20%
+Update progress: 41
+Parsed: 20%
+Update progress: 42
+Parsed: 21%
+Update progress: 43
+Parsed: 21%
+Update progress: 44
+Parsed: 22%
+Update progress: 45
+Parsed: 22%
+Update progress: 46
+Parsed: 23%
+Update progress: 47
+Parsed: 23%
+Update progress: 48
+Parsed: 24%
+Update progress: 49
+Parsed: 24%
+Update progress: 50
+Parsed: 25%
+Update progress: 51
+Parsed: 25%
+Update progress: 52
+Parsed: 26%
+Update progress: 53
+Parsed: 26%
+Update progress: 54
+Parsed: 27%
+Update progress: 55
+Parsed: 27%
+Update progress: 56
+Parsed: 28%
+Update progress: 57
+Parsed: 28%
+Update progress: 58
+Parsed: 29%
+Update progress: 59
+Parsed: 29%
+Update progress: 60
+Parsed: 30%
+Update progress: 61
+Parsed: 30%
+Update progress: 62
+Parsed: 31%
+Update progress: 63
+Parsed: 31%
+Update progress: 64
+Parsed: 32%
+Update progress: 65
+Parsed: 32%
+Update progress: 66
+Parsed: 33%
+Update progress: 67
+Parsed: 33%
+Update progress: 68
+Parsed: 34%
+Update progress: 69
+Parsed: 34%
+Update progress: 70
+Parsed: 35%
+Update progress: 71
+Parsed: 35%
+Update progress: 72
+Parsed: 36%
+Update progress: 73
+Parsed: 36%
+Update progress: 74
+Parsed: 37%
+Update progress: 75
+Parsed: 37%
+Update progress: 76
+Parsed: 38%
+Update progress: 77
+Parsed: 38%
+Update progress: 78
+Parsed: 39%
+Update progress: 79
+Parsed: 39%
+Update progress: 80
+Parsed: 40%
+Update progress: 81
+Parsed: 40%
+Update progress: 82
+Parsed: 41%
+Update progress: 83
+Parsed: 41%
+Update progress: 84
+Parsed: 42%
+Update progress: 85
+Parsed: 42%
+Update progress: 86
+Parsed: 43%
+Update progress: 87
+Parsed: 43%
+Update progress: 88
+Parsed: 44%
+Update progress: 89
+Parsed: 44%
+Update progress: 90
+Parsed: 45%
+Update progress: 91
+Parsed: 45%
+Update progress: 92
+Parsed: 46%
+Update progress: 93
+Parsed: 46%
+Update progress: 94
+Parsed: 47%
+Update progress: 95
+Parsed: 47%
+Update progress: 96
+Parsed: 48%
+Update progress: 97
+Parsed: 48%
+Parsed: 51%
+Parsed: 52%
+Parsed: 52%
+Parsed: 53%
+Parsed: 54%
+Parsed: 55%
+Parsed: 56%
+Parsed: 57%
+Parsed: 58%
+Parsed: 59%
+Parsed: 59%
+Parsed: 60%
+Parsed: 61%
+Parsed: 62%
+Parsed: 63%
+Parsed: 64%
+Parsed: 65%
+Parsed: 66%
+Parsed: 66%
+Parsed: 67%
+Parsed: 68%
+Parsed: 69%
+Parsed: 70%
+Parsed: 71%
+Parsed: 72%
+Parsed: 73%
+Parsed: 73%
+Parsed: 74%
+Parsed: 75%
+Parsed: 76%
+Parsed: 77%
+Parsed: 78%
+Parsed: 79%
+Parsed: 80%
+Parsed: 80%
+Parsed: 81%
+Parsed: 82%
+Parsed: 83%
+Parsed: 84%
+Parsed: 85%
+Parsed: 86%
+Parsed: 87%
+Parsed: 87%
+Parsed: 88%
+Parsed: 89%
+Parsed: 90%
+Parsed: 91%
+Parsed: 92%
+Parsed: 93%
+Parsed: 94%
+Parsed: 94%
+Parsed: 95%
+Parsed: 96%
+Parsed: 97%
+Parsed: 98%
+Parsed: 99%
+Gcode parsed in: 00:00:00.2950192
+Update progress: 1
+Parsed: 0%
+Update progress: 2
+Parsed: 1%
+Update progress: 3
+Parsed: 1%
+Update progress: 4
+Parsed: 2%
+Update progress: 5
+Parsed: 2%
+Update progress: 6
+Parsed: 3%
+Update progress: 7
+Parsed: 3%
+Update progress: 8
+Parsed: 4%
+Update progress: 9
+Parsed: 4%
+Update progress: 10
+Parsed: 5%
+Update progress: 11
+Parsed: 5%
+Update progress: 12
+Parsed: 6%
+Update progress: 13
+Parsed: 6%
+Update progress: 14
+Parsed: 7%
+Update progress: 15
+Parsed: 7%
+Update progress: 16
+Parsed: 8%
+Update progress: 17
+Parsed: 8%
+Update progress: 18
+Parsed: 9%
+Update progress: 19
+Parsed: 9%
+Update progress: 20
+Parsed: 10%
+Update progress: 21
+Parsed: 10%
+Update progress: 22
+Parsed: 11%
+Update progress: 23
+Parsed: 11%
+Update progress: 24
+Parsed: 12%
+Update progress: 25
+Parsed: 12%
+Update progress: 26
+Parsed: 13%
+Update progress: 27
+Parsed: 13%
+Update progress: 28
+Parsed: 14%
+Update progress: 29
+Parsed: 14%
+Update progress: 30
+Parsed: 15%
+Update progress: 31
+Parsed: 15%
+Update progress: 32
+Parsed: 16%
+Update progress: 33
+Parsed: 16%
+Update progress: 34
+Parsed: 17%
+Update progress: 35
+Parsed: 17%
+Update progress: 36
+Parsed: 18%
+Update progress: 37
+Parsed: 18%
+Update progress: 38
+Parsed: 19%
+Update progress: 39
+Parsed: 19%
+Update progress: 40
+Parsed: 20%
+Update progress: 41
+Parsed: 20%
+Update progress: 42
+Parsed: 21%
+Update progress: 43
+Parsed: 21%
+Update progress: 44
+Parsed: 22%
+Update progress: 45
+Parsed: 22%
+Update progress: 46
+Parsed: 23%
+Update progress: 47
+Parsed: 23%
+Update progress: 48
+Parsed: 24%
+Update progress: 49
+Parsed: 24%
+Update progress: 50
+Parsed: 25%
+Update progress: 51
+Parsed: 25%
+Update progress: 52
+Parsed: 26%
+Update progress: 53
+Parsed: 26%
+Update progress: 54
+Parsed: 27%
+Update progress: 55
+Parsed: 27%
+Update progress: 56
+Parsed: 28%
+Update progress: 57
+Parsed: 28%
+Update progress: 58
+Parsed: 29%
+Update progress: 59
+Parsed: 29%
+Update progress: 60
+Parsed: 30%
+Update progress: 61
+Parsed: 30%
+Update progress: 62
+Parsed: 31%
+Update progress: 63
+Parsed: 31%
+Update progress: 64
+Parsed: 32%
+Update progress: 65
+Parsed: 32%
+Update progress: 66
+Parsed: 33%
+Update progress: 67
+Parsed: 33%
+Update progress: 68
+Parsed: 34%
+Update progress: 69
+Parsed: 34%
+Update progress: 70
+Parsed: 35%
+Update progress: 71
+Parsed: 35%
+Update progress: 72
+Parsed: 36%
+Update progress: 73
+Parsed: 36%
+Update progress: 74
+Parsed: 37%
+Update progress: 75
+Parsed: 37%
+Update progress: 76
+Parsed: 38%
+Update progress: 77
+Parsed: 38%
+Update progress: 78
+Parsed: 39%
+Update progress: 79
+Parsed: 39%
+Update progress: 80
+Parsed: 40%
+Update progress: 81
+Parsed: 40%
+Update progress: 82
+Parsed: 41%
+Update progress: 83
+Parsed: 41%
+Update progress: 84
+Parsed: 42%
+Update progress: 85
+Parsed: 42%
+Update progress: 86
+Parsed: 43%
+Update progress: 87
+Parsed: 43%
+Update progress: 88
+Parsed: 44%
+Update progress: 89
+Parsed: 44%
+Update progress: 90
+Parsed: 45%
+Update progress: 91
+Parsed: 45%
+Update progress: 92
+Parsed: 46%
+Update progress: 93
+Parsed: 46%
+Update progress: 94
+Parsed: 47%
+Update progress: 95
+Parsed: 47%
+Update progress: 96
+Parsed: 48%
+Exception: System.UnhandledExceptionEventArgs
+Parsed: 51%
+Parsed: 52%
+Parsed: 53%
+Parsed: 53%
+Parsed: 54%
+Parsed: 55%
+Parsed: 56%
+Parsed: 57%
+Parsed: 58%
+Parsed: 59%
+Parsed: 60%
+Parsed: 61%
+Parsed: 62%
+Parsed: 63%
+Parsed: 64%
+Parsed: 65%
+Parsed: 65%
+Parsed: 66%
+Parsed: 67%
+Parsed: 68%
+Parsed: 69%
+Parsed: 70%
+Parsed: 71%
+Parsed: 72%
+Parsed: 73%
+Parsed: 74%
+Parsed: 75%
+Parsed: 76%
+Parsed: 77%
+Parsed: 78%
+Parsed: 78%
+Parsed: 79%
+Parsed: 80%
+Parsed: 81%
+Parsed: 82%
+Parsed: 83%
+Parsed: 84%
+Parsed: 85%
+Parsed: 86%
+Parsed: 87%
+Parsed: 88%
+Parsed: 89%
+Parsed: 90%
+Parsed: 90%
+Parsed: 91%
+Parsed: 92%
+Parsed: 93%
+Parsed: 94%
+Parsed: 95%
+Parsed: 96%
+Parsed: 98%
+Parsed: 97%
+Parsed: 99%
+Gcode parsed in: 00:00:00.0469799
+Update progress: 1
+Parsed: 0%
+Update progress: 2
+Parsed: 1%
+Update progress: 3
+Parsed: 1%
+Update progress: 4
+Parsed: 2%
+Update progress: 5
+Parsed: 2%
+Update progress: 6
+Parsed: 3%
+Update progress: 7
+Parsed: 3%
+Update progress: 8
+Parsed: 4%
+Update progress: 9
+Parsed: 4%
+Update progress: 10
+Parsed: 5%
+Update progress: 11
+Parsed: 5%
+Update progress: 12
+Parsed: 6%
+Update progress: 13
+Parsed: 6%
+Update progress: 14
+Parsed: 7%
+Update progress: 15
+Parsed: 7%
+Update progress: 16
+Parsed: 8%
+Update progress: 17
+Parsed: 8%
+Update progress: 18
+Parsed: 9%
+Update progress: 19
+Parsed: 9%
+Update progress: 20
+Parsed: 10%
+Update progress: 21
+Parsed: 10%
+Update progress: 22
+Parsed: 11%
+Update progress: 23
+Parsed: 11%
+Update progress: 24
+Parsed: 12%
+Update progress: 25
+Parsed: 12%
+Update progress: 26
+Parsed: 13%
+Update progress: 27
+Parsed: 13%
+Update progress: 28
+Parsed: 14%
+Update progress: 29
+Parsed: 14%
+Update progress: 30
+Parsed: 15%
+Update progress: 31
+Parsed: 15%
+Update progress: 32
+Parsed: 16%
+Update progress: 33
+Parsed: 16%
+Update progress: 34
+Parsed: 17%
+Update progress: 35
+Parsed: 17%
+Update progress: 36
+Parsed: 18%
+Update progress: 37
+Parsed: 18%
+Update progress: 38
+Parsed: 19%
+Update progress: 39
+Parsed: 19%
+Update progress: 40
+Parsed: 20%
+Update progress: 41
+Parsed: 20%
+Update progress: 42
+Parsed: 21%
+Update progress: 43
+Parsed: 21%
+Update progress: 44
+Parsed: 22%
+Update progress: 45
+Parsed: 22%
+Update progress: 46
+Parsed: 23%
+Update progress: 47
+Parsed: 23%
+Update progress: 48
+Parsed: 24%
+Update progress: 49
+Parsed: 24%
+Update progress: 50
+Parsed: 25%
+Update progress: 51
+Parsed: 25%
+Update progress: 52
+Parsed: 26%
+Update progress: 53
+Parsed: 26%
+Update progress: 54
+Parsed: 27%
+Update progress: 55
+Parsed: 27%
+Update progress: 56
+Parsed: 28%
+Update progress: 57
+Parsed: 28%
+Update progress: 58
+Parsed: 29%
+Update progress: 59
+Parsed: 29%
+Update progress: 60
+Parsed: 30%
+Update progress: 61
+Parsed: 30%
+Update progress: 62
+Parsed: 31%
+Update progress: 63
+Parsed: 31%
+Update progress: 64
+Parsed: 32%
+Update progress: 65
+Parsed: 32%
+Update progress: 66
+Parsed: 33%
+Update progress: 67
+Parsed: 33%
+Update progress: 68
+Parsed: 34%
+Update progress: 69
+Parsed: 34%
+Update progress: 70
+Parsed: 35%
+Update progress: 71
+Parsed: 35%
+Update progress: 72
+Parsed: 36%
+Update progress: 73
+Parsed: 36%
+Update progress: 74
+Parsed: 37%
+Update progress: 75
+Parsed: 37%
+Update progress: 76
+Parsed: 38%
+Update progress: 77
+Parsed: 38%
+Update progress: 78
+Parsed: 39%
+Update progress: 79
+Parsed: 39%
+Update progress: 80
+Parsed: 40%
+Update progress: 81
+Parsed: 40%
+Update progress: 82
+Parsed: 41%
+Update progress: 83
+Parsed: 41%
+Update progress: 84
+Parsed: 42%
+Update progress: 85
+Parsed: 42%
+Update progress: 86
+Parsed: 43%
+Update progress: 87
+Parsed: 43%
+Update progress: 88
+Parsed: 44%
+Update progress: 89
+Parsed: 44%
+Update progress: 90
+Parsed: 45%
+Update progress: 91
+Parsed: 45%
+Update progress: 92
+Parsed: 46%
+Update progress: 93
+Parsed: 46%
+Update progress: 94
+Parsed: 47%
+Parsed: 50%
+Parsed: 51%
+Parsed: 51%
+Parsed: 52%
+Parsed: 52%
+Parsed: 53%
+Parsed: 53%
+Parsed: 54%
+Parsed: 54%
+Parsed: 55%
+Parsed: 55%
+Parsed: 56%
+Parsed: 56%
+Parsed: 57%
+Parsed: 57%
+Parsed: 58%
+Parsed: 58%
+Parsed: 59%
+Parsed: 59%
+Parsed: 60%
+Parsed: 60%
+Parsed: 61%
+Parsed: 61%
+Parsed: 62%
+Parsed: 62%
+Parsed: 63%
+Parsed: 63%
+Parsed: 64%
+Parsed: 64%
+Parsed: 65%
+Parsed: 65%
+Parsed: 66%
+Parsed: 66%
+Parsed: 67%
+Parsed: 67%
+Parsed: 68%
+Parsed: 68%
+Parsed: 69%
+Parsed: 69%
+Parsed: 70%
+Parsed: 70%
+Parsed: 71%
+Parsed: 71%
+Parsed: 72%
+Parsed: 72%
+Parsed: 73%
+Parsed: 73%
+Parsed: 74%
+Parsed: 74%
+Parsed: 75%
+Parsed: 75%
+Parsed: 76%
+Parsed: 76%
+Parsed: 77%
+Parsed: 77%
+Parsed: 78%
+Parsed: 78%
+Parsed: 79%
+Parsed: 79%
+Parsed: 80%
+Parsed: 80%
+Parsed: 81%
+Parsed: 81%
+Parsed: 82%
+Parsed: 82%
+Parsed: 83%
+Parsed: 83%
+Parsed: 84%
+Parsed: 84%
+Parsed: 85%
+Parsed: 85%
+Parsed: 86%
+Parsed: 86%
+Parsed: 87%
+Parsed: 87%
+Parsed: 88%
+Parsed: 88%
+Parsed: 89%
+Parsed: 89%
+Parsed: 90%
+Parsed: 90%
+Parsed: 91%
+Parsed: 91%
+Parsed: 92%
+Parsed: 92%
+Parsed: 93%
+Parsed: 93%
+Parsed: 94%
+Parsed: 94%
+Parsed: 95%
+Parsed: 95%
+Parsed: 96%
+Parsed: 96%
+Parsed: 97%
+Parsed: 97%
+Parsed: 98%
+Parsed: 98%
+Parsed: 99%
+Parsed: 99%
+Gcode parsed in: 00:00:01.2220011
+Update progress: 1
+Parsed: 0%
+Update progress: 2
+Parsed: 1%
+Update progress: 3
+Parsed: 1%
+Update progress: 4
+Parsed: 2%
+Update progress: 5
+Parsed: 2%
+Update progress: 6
+Parsed: 3%
+Update progress: 7
+Parsed: 3%
+Update progress: 8
+Parsed: 4%
+Update progress: 9
+Parsed: 4%
+Update progress: 10
+Parsed: 5%
+Update progress: 11
+Parsed: 5%
+Update progress: 12
+Parsed: 6%
+Update progress: 13
+Parsed: 6%
+Update progress: 14
+Parsed: 7%
+Update progress: 15
+Parsed: 7%
+Update progress: 16
+Parsed: 8%
+Update progress: 17
+Parsed: 8%
+Update progress: 18
+Parsed: 9%
+Update progress: 19
+Parsed: 9%
+Update progress: 20
+Parsed: 10%
+Update progress: 21
+Parsed: 10%
+Update progress: 22
+Parsed: 11%
+Update progress: 23
+Parsed: 11%
+Update progress: 24
+Parsed: 12%
+Update progress: 25
+Parsed: 12%
+Update progress: 26
+Parsed: 13%
+Update progress: 27
+Parsed: 13%
+Update progress: 28
+Parsed: 14%
+Update progress: 29
+Parsed: 14%
+Update progress: 30
+Parsed: 15%
+Update progress: 31
+Parsed: 15%
+Update progress: 32
+Parsed: 16%
+Update progress: 33
+Parsed: 16%
+Update progress: 34
+Parsed: 17%
+Update progress: 35
+Parsed: 17%
+Update progress: 36
+Parsed: 18%
+Update progress: 37
+Parsed: 18%
+Update progress: 38
+Parsed: 19%
+Update progress: 39
+Parsed: 19%
+Update progress: 40
+Parsed: 20%
+Update progress: 41
+Parsed: 20%
+Update progress: 42
+Parsed: 21%
+Update progress: 43
+Parsed: 21%
+Update progress: 44
+Parsed: 22%
+Update progress: 45
+Parsed: 22%
+Update progress: 46
+Parsed: 23%
+Update progress: 47
+Parsed: 23%
+Update progress: 48
+Parsed: 24%
+Update progress: 49
+Parsed: 24%
+Update progress: 50
+Parsed: 25%
+Update progress: 51
+Parsed: 25%
+Update progress: 52
+Parsed: 26%
+Update progress: 53
+Parsed: 26%
+Update progress: 54
+Parsed: 27%
+Update progress: 55
+Parsed: 27%
+Update progress: 56
+Parsed: 28%
+Update progress: 57
+Parsed: 28%
+Update progress: 58
+Parsed: 29%
+Update progress: 59
+Parsed: 29%
+Update progress: 60
+Parsed: 30%
+Update progress: 61
+Parsed: 30%
+Update progress: 62
+Parsed: 31%
+Update progress: 63
+Parsed: 31%
+Update progress: 64
+Parsed: 32%
+Update progress: 65
+Parsed: 32%
+Update progress: 66
+Parsed: 33%
+Update progress: 67
+Parsed: 33%
+Update progress: 68
+Parsed: 34%
+Update progress: 69
+Parsed: 34%
+Update progress: 70
+Parsed: 35%
+Update progress: 71
+Parsed: 35%
+Update progress: 72
+Parsed: 36%
+Update progress: 73
+Parsed: 36%
+Update progress: 74
+Parsed: 37%
+Update progress: 75
+Parsed: 37%
+Update progress: 76
+Parsed: 38%
+Update progress: 77
+Parsed: 38%
+Update progress: 78
+Parsed: 39%
+Update progress: 79
+Parsed: 39%
+Update progress: 80
+Parsed: 40%
+Update progress: 81
+Parsed: 40%
+Update progress: 82
+Parsed: 41%
+Update progress: 83
+Parsed: 41%
+Update progress: 84
+Parsed: 42%
+Update progress: 85
+Parsed: 42%
+Update progress: 86
+Parsed: 43%
+Update progress: 87
+Parsed: 43%
+Update progress: 88
+Parsed: 44%
+Update progress: 89
+Parsed: 44%
+Update progress: 90
+Parsed: 45%
+Update progress: 91
+Parsed: 45%
+Update progress: 92
+Parsed: 46%
+Update progress: 93
+Parsed: 46%
+Parsed: 50%
+Parsed: 51%
+Parsed: 51%
+Parsed: 52%
+Parsed: 52%
+Parsed: 53%
+Parsed: 53%
+Parsed: 54%
+Parsed: 54%
+Parsed: 55%
+Parsed: 55%
+Parsed: 56%
+Parsed: 56%
+Parsed: 57%
+Parsed: 57%
+Parsed: 58%
+Parsed: 58%
+Parsed: 59%
+Parsed: 59%
+Parsed: 60%
+Parsed: 60%
+Parsed: 61%
+Parsed: 61%
+Parsed: 62%
+Parsed: 62%
+Parsed: 63%
+Parsed: 63%
+Parsed: 64%
+Parsed: 64%
+Parsed: 65%
+Parsed: 65%
+Parsed: 66%
+Parsed: 66%
+Parsed: 67%
+Parsed: 67%
+Parsed: 68%
+Parsed: 68%
+Parsed: 69%
+Parsed: 69%
+Parsed: 70%
+Parsed: 70%
+Parsed: 71%
+Parsed: 71%
+Parsed: 72%
+Parsed: 72%
+Parsed: 73%
+Parsed: 73%
+Parsed: 74%
+Parsed: 74%
+Parsed: 75%
+Parsed: 75%
+Parsed: 76%
+Parsed: 76%
+Parsed: 77%
+Parsed: 77%
+Parsed: 78%
+Parsed: 78%
+Parsed: 79%
+Parsed: 79%
+Parsed: 80%
+Parsed: 80%
+Parsed: 81%
+Parsed: 81%
+Parsed: 82%
+Parsed: 82%
+Parsed: 83%
+Parsed: 83%
+Parsed: 84%
+Parsed: 84%
+Parsed: 85%
+Parsed: 85%
+Parsed: 86%
+Parsed: 86%
+Parsed: 87%
+Parsed: 87%
+Parsed: 88%
+Parsed: 88%
+Parsed: 89%
+Parsed: 89%
+Parsed: 90%
+Parsed: 90%
+Parsed: 91%
+Parsed: 91%
+Parsed: 92%
+Parsed: 92%
+Parsed: 93%
+Parsed: 93%
+Parsed: 94%
+Parsed: 94%
+Parsed: 95%
+Parsed: 95%
+Parsed: 96%
+Parsed: 96%
+Parsed: 97%
+Parsed: 97%
+Parsed: 98%
+Parsed: 98%
+Parsed: 99%
+Parsed: 99%
+Parsed: 100%
+Gcode parsed in: 00:00:04.7795132

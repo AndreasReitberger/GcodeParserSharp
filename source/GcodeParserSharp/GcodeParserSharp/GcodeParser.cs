@@ -1,5 +1,5 @@
 ﻿using AndreasReitberger.Models;
-using AndreasReitberger.Utilities;
+using AndreasReitberger.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -128,13 +128,17 @@ namespace AndreasReitberger
         public async Task<Gcode> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration config = null)
         {
             if(config != null)
+            {
                 Config = config;
+            }
             return await ParseGcodeAsync(new Gcode(filePath), prog, cancellationToken, useCommentRead).ConfigureAwait(false);
         }
         public async Task<Gcode> FromGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration config = null)
         {
             if (config != null)
+            {
                 Config = config;
+            }
             return await ParseGcodeAsync(gcode, prog, cancellationToken, useCommentRead).ConfigureAwait(false);
         }
 
@@ -173,15 +177,15 @@ namespace AndreasReitberger
 
         public string CommandsToText(Gcode gcode)
         {
-            var cmds = gcode.Commands;
+            List<List<GcodeCommandLine>> cmds = gcode.Commands;
             StringBuilder sb = new();
             for (int i = 0; i < cmds.Count; i++)
             {
-                var list = cmds[i];
+                List<GcodeCommandLine> list = cmds[i];
                 sb.AppendLine($"Layer: {i}");
                 for (int j = 0; j < list.Count; j++)
                 {
-                    var cmd = list[j];
+                    GcodeCommandLine cmd = list[j];
                     sb.AppendLine($"{j}: x = {cmd.X} / y = {cmd.Y} / x = {cmd.X} | px = {cmd.PrevX} / py = {cmd.PrevY} / pz = {cmd.PrevZ} |" +
                         $"{(cmd.IsExtruding ? $"{cmd.Extruder} = {cmd.Extrusion} / " : "")} retract = {cmd.Retract} / speed = {cmd.Speed} ");
                 }
@@ -197,7 +201,7 @@ namespace AndreasReitberger
             {
                 gcode.IsWorking = true;
                 TimeSpan start = DateTime.Now.TimeOfDay;
-                var progress = prog;
+                IProgress<int> progress = prog;
 
                 Dictionary<int, int> overallProgress = new()
                 {
@@ -318,7 +322,7 @@ namespace AndreasReitberger
                             }
                             if (report && prog != null)
                             {
-                                var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
+                                int completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
                                 prog.Report(completeProgress);
                             }
                         }
@@ -365,7 +369,7 @@ namespace AndreasReitberger
                     }
                     if (report && prog != null)
                     {
-                        var completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
+                        int completeProgress = overallProgress.Sum(pair => pair.Value) / overallProgress.Count;
                         prog.Report(completeProgress);
                     }
                 }
@@ -1035,7 +1039,9 @@ namespace AndreasReitberger
 
                 }
                 else
+                {
                     result.PrintTimeAddition += temp; // (float)Math.Sqrt(Math.Pow((command.X) - (command.PreviousX), 2) + Math.Pow((command.Y) - (command.PreviousY), 2)) / (command.Speed / 60);
+                }
             }
             // Calculate time for extrusion
             else if (command.Retract == 0 && command.Extrusion != 0)
@@ -1064,8 +1070,10 @@ namespace AndreasReitberger
                     }
                     // If both valid, take the one who takes longer.
                     else
+                    {
                         //result.TotalPrintTime += tmp1 > tmp2 ? tmp1 : tmp2;
                         result.PrintTimeAddition += tmp1 > tmp2 ? tmp1 : tmp2;
+                    }
                 }
 
             }
@@ -1095,7 +1103,9 @@ namespace AndreasReitberger
                     }
                     // If both valid, take the one who takes longer.
                     else
+                    {
                         result.PrintTimeAddition += tmp1 > tmp2 ? tmp1 : tmp2;
+                    }
                 }
             }
 
@@ -1124,7 +1134,7 @@ namespace AndreasReitberger
         {
             // If already passed as double string
             //if (Regex.IsMatch(printTime, @"(\d+(\.\d+)?)|(\.\d+)"))
-            if (Regex.IsMatch(printTime, @"^((\d+(\.\d+)?)|(\.\d+))$"))
+            if (Regex.IsMatch(printTime, @"^((\d+((\.|\,)\d+)?)|((\.|\,)\d+))$"))
             {
                 return Convert.ToDecimal(printTime);
             }
