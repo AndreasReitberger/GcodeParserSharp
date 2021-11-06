@@ -2,7 +2,7 @@
 A simple C# project to parse gcode files and get the estimated print time and extruded filament volume.
 The logic behind the project is based on the gCodeViewer by @hudbrog.
 
-Project: https://github.com/hudbrog/gCodeViewer
+Project: https://github.com/hudbrog/gCodeViewer </br>
 License: https://github.com/hudbrog/gCodeViewer/blob/master/LICENSE (https://creativecommons.org/licenses/by/4.0/)
 
 # Usage
@@ -31,3 +31,7 @@ public async Task ParseGcodeAsync()
         Assert.Fail($"{testfile} not found!");
 }
 ```
+
+# Dependencies
+RCoreSharp: https://github.com/AndreasReitberger/CoreSharp </br>
+OctoPrintRestApiSharp: https://github.com/AndreasReitberger/OctoPrintRestApiSharp
