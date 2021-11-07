@@ -22,7 +22,7 @@ namespace AndreasReitberger.Models
             get => _id;
             set
             {
-                if (_id == value) return;          
+                if (_id == value) return;
                 _id = value;
                 OnPropertyChanged();
             }

@@ -17,7 +17,7 @@
 
         #region Properties
 
-        public string PrinterName { get; set; } 
+        public string PrinterName { get; set; }
         public double AMax_xy { get; set; }
         public double AMax_z { get; set; }
         public double AMax_e { get; set; }
