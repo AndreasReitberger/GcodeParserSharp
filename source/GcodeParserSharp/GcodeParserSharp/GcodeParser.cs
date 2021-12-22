@@ -110,7 +110,7 @@ namespace AndreasReitberger
         #endregion
 
         #region Constructor
-        public GcodeParser() 
+        public GcodeParser()
         {
             Config = SlicerPrinterConfiguration.Default;
             SupportedSlicers = GcodeParserGloblStaticConfig.SupportedSlicersForCommentRead;
@@ -127,7 +127,7 @@ namespace AndreasReitberger
         #region Public
         public async Task<Gcode> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration config = null)
         {
-            if(config != null)
+            if (config != null)
             {
                 Config = config;
             }
@@ -205,8 +205,8 @@ namespace AndreasReitberger
 
                 Dictionary<int, int> overallProgress = new()
                 {
-                    {0, 0 },  // File reading & Parsing
-                    {2, 0 },  // Analyzing
+                    { 0, 0 },  // File reading & Parsing
+                    { 2, 0 },  // Analyzing
                 };
 
                 gcode.IsValid = false;
@@ -225,19 +225,19 @@ namespace AndreasReitberger
 
                     Dictionary<string, double> PreviousExtrusion = new()
                     {
-                        {"a", 0 },
-                        {"b", 0 },
-                        {"c", 0 },
-                        {"e", 0 },
-                        {"abs", 0 },
+                        { "a", 0 },
+                        { "b", 0 },
+                        { "c", 0 },
+                        { "e", 0 },
+                        { "abs", 0 },
                     };
                     Dictionary<string, double> PreviousRetraction = new()
                     {
-                        {"a", 0 },
-                        {"b", 0 },
-                        {"c", 0 },
-                        {"e", 0 },
-                        {"abs", 0 },
+                        { "a", 0 },
+                        { "b", 0 },
+                        { "c", 0 },
+                        { "e", 0 },
+                        { "abs", 0 },
                     };
 
                     double previousX = double.NegativeInfinity;
@@ -326,7 +326,7 @@ namespace AndreasReitberger
                                 prog.Report(completeProgress);
                             }
                         }
-                        catch(Exception exc)
+                        catch (Exception exc)
                         {
                             OnError(new UnhandledExceptionEventArgs(exc, false));
                             continue;
@@ -1009,12 +1009,12 @@ namespace AndreasReitberger
                     result.PrintTimeAddition += temp;
                 }
             }
-                
+
             if ((result.ValidX && !result.ValidY) || (result.ValidY && !result.ValidX))
             {
 
             }
-                
+
             if (!double.IsInfinity(command.PrevZ) && command.IsExtruding && !double.IsNaN(command.PrevZ))
             {
                 result.MaxZ = (result.MaxZ > command.PrevZ) ? result.MaxZ : command.PrevZ;
@@ -1210,7 +1210,7 @@ namespace AndreasReitberger
         }
         SlicerName GetSlicerNameFromLines(List<string> lines)
         {
-            for(int i = 0; i < lines.Count; i++)
+            for (int i = 0; i < lines.Count; i++)
             {
                 string slicerLine = lines[i];
                 if (slicerLine.Contains("Slic3r"))
@@ -1361,7 +1361,7 @@ namespace AndreasReitberger
                                 return unknown;
                         }
                     // Voxelizer 2
-                    case SlicerName.Voxelizer2:                      
+                    case SlicerName.Voxelizer2:
                         VoxelizerSingleGcodeInfo gInfo = new();
                         try
                         {
@@ -1384,7 +1384,7 @@ namespace AndreasReitberger
                             return string.Empty;
 
                         }
-                        
+
                         switch (Parameter)
                         {
                             case SlicerParameter.FilamentUsed:
@@ -1427,7 +1427,7 @@ namespace AndreasReitberger
                                     mins,
                                     seconds
                                     );
-                                return timeString; 
+                                return timeString;
                             default:
                                 return unknown;
                         }
@@ -1545,7 +1545,7 @@ namespace AndreasReitberger
                                 }
                                 else
                                     return printT.ToString();
-                           
+
                             case SlicerParameter.FilamentUsed:
                                 myregex = new Regex(@"[;]Filament used:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();

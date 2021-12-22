@@ -185,10 +185,10 @@ namespace GcodeParserSharp.Test.Models
                             switch (cmd.Command)
                             {
                                 case "g0":
-                                        DrawLine(rapidmoves, x_prev, y_prev, z_prev, x, y, z);
+                                    DrawLine(rapidmoves, x_prev, y_prev, z_prev, x, y, z);
                                     break;
                                 case "g1":
-                                        DrawLine(normalmoves, x_prev, y_prev, z_prev, x, y, z);
+                                    DrawLine(normalmoves, x_prev, y_prev, z_prev, x, y, z);
                                     break;
                                 case "g2":
                                 case "g3":
