@@ -8,7 +8,7 @@ License: https://github.com/hudbrog/gCodeViewer/blob/master/LICENSE (https://cre
 # Nuget
 Get the latest version from nuget.org<br>
 [![NuGet](https://img.shields.io/nuget/v/GcodeParserSharp.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/GcodeParserSharp/)
-
+[![NuGet](https://img.shields.io/nuget/dt/GcodeParserSharp.svg)](https://www.nuget.org/packages/GcodeParserSharp)
 
 # Usage
 You can use the `GcodeParser.Instance` to parse any gcode file.
