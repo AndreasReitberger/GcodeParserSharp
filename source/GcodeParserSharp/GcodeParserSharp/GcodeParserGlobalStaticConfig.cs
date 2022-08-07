@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AndreasReitberger
 {
-    public static class GcodeParserGloblStaticConfig
+    public static class GcodeParserGlobalStaticConfig
     {
         public static List<SlicerInfo> SupportedSlicersForCommentRead = new()
         {

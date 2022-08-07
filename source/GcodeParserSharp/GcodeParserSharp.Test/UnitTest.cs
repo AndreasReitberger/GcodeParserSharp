@@ -39,6 +39,7 @@ namespace GcodeParserSharp.Test
             GcodeParser.Instance.Error += (a, b) =>
             {
                 Console.WriteLine($"Exception: {b}");
+                Assert.Fail(b.ToString());
             };
             foreach (string file in testfiles)
             {
