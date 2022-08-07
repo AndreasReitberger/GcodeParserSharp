@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "668ebfea-f41c-4693-acb7-7b6e333b28b2": {
+      "ProjectGuid": "668ebfea-f41c-4693-acb7-7b6e333b28b2",
+      "DisplayName": "GcodeParserSharp",
+      "ColorIndex": 0
+    },
+    "75ca5280-e8b9-44c6-b36b-6c4771c2d41d": {
+      "ProjectGuid": "75ca5280-e8b9-44c6-b36b-6c4771c2d41d",
+      "DisplayName": "GcodeParserSharp.Test",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

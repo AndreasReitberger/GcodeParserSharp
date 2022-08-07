@@ -113,11 +113,11 @@ namespace AndreasReitberger
         public GcodeParser()
         {
             Config = SlicerPrinterConfiguration.Default;
-            SupportedSlicers = GcodeParserGloblStaticConfig.SupportedSlicersForCommentRead;
+            SupportedSlicers = GcodeParserGlobalStaticConfig.SupportedSlicersForCommentRead;
         }
         public GcodeParser(SlicerPrinterConfiguration config)
         {
-            SupportedSlicers = GcodeParserGloblStaticConfig.SupportedSlicersForCommentRead;
+            SupportedSlicers = GcodeParserGlobalStaticConfig.SupportedSlicersForCommentRead;
             Config = config;
         }
         #endregion
@@ -259,6 +259,10 @@ namespace AndreasReitberger
                     {
                         try
                         {
+                            if(line == "G28 X Y")
+                            {
+
+                            }
                             if (!string.IsNullOrEmpty(line) && !line.Trim().StartsWith(";"))
                             {
                                 if (line.StartsWith("G1"))
@@ -339,17 +343,17 @@ namespace AndreasReitberger
                 // Analyze
                 for (int i = 0; i < commands.Count; i++)
                 {
-                    var cmds = commands[i];
+                    List<GcodeCommandLine> cmds = commands[i];
                     for (int j = 0; j < cmds.Count; j++)
                     {
-                        var singleCmd = cmds[j];
+                        GcodeCommandLine singleCmd = cmds[j];
                         ProcessSingleGcodeCommandLine(singleCmd, ref result, cancellationToken);
                         //result = ProcessSingleGcodeCommandLine(cmd, result, cancellationToken);
                     }
 
                     // Report current progress
                     //int currentProgress = (int)((i / commands.Count) * 100);
-                    double currentProgress = (((double)i / (double)commands.Count) * 100f);
+                    double currentProgress = (double)i / (double)commands.Count * 100f;
                     int roundedProgress = Convert.ToInt32(currentProgress);
                     bool report = false;
                     if (i < commands.Count)
@@ -594,7 +598,10 @@ namespace AndreasReitberger
                     }
                     gcode.IsValid = true;
                 }
+                else
+                {
 
+                }
                 TimeSpan end = DateTime.Now.TimeOfDay;
                 gcode.ParsingDuration = LastParsingDuration = end - start;
 
@@ -885,13 +892,22 @@ namespace AndreasReitberger
                     switch (arg[0])
                     {
                         case 'x':
-                            X = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            if (arg.Length > 1)
+                            {
+                                X = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            }
                             break;
                         case 'y':
-                            Y = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            if (arg.Length > 1)
+                            {
+                                Y = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            }
                             break;
                         case 'z':
-                            Z = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            if (arg.Length > 1)
+                            {
+                                Z = double.Parse(arg.TrimStart(arg[0]), CultureInfo.InvariantCulture);
+                            }
                             if (Z == previousZ)
                             {
                                 continue;
@@ -1553,32 +1569,46 @@ namespace AndreasReitberger
                                 List<double> filamentLength = new();
                                 foreach (string line in lines)
                                 {
-                                    string s = Regex.Match(line, @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
-                                    GroupCollection unit = Regex.Match(line, @"(\b(\d+(?:\.\d+)?)\s*([cmk]?m)\b)").Groups;
-                                    string stringUnit = unit[groupnum: unit.Count - 1].Value;
-                                    //string stringUnit = unit[unit.Count - 1].Value;
-                                    // Check if it's a valid double format
-                                    if (Double.TryParse(s, out double filament))
+                                    // For multiple extruders
+                                    List<string> filamentUsages = new();
+                                    if (line.Contains(","))
                                     {
-                                        // Filament is al
-                                        filament = Convert.ToDouble(s, CultureInfo.GetCultureInfo("en-US"));
-                                        switch (stringUnit)
+                                        filamentUsages.AddRange(line.Split(','));
+                                    }
+                                    else
+                                    {
+                                        filamentUsages.Add(line);
+                                    }
+                                    for(int i = 0; i < filamentUsages.Count; i++)
+                                    {
+                                        //string s = Regex.Match(filamentUsages[i], @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
+                                        string s = Regex.Match(filamentUsages[i], @"(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
+                                        GroupCollection unit = Regex.Match(line, @"(\b(\d+(?:\.\d+)?)\s*([cmk]?m)\b)").Groups;
+                                        string stringUnit = unit[groupnum: unit.Count - 1].Value;
+                                        //string stringUnit = unit[unit.Count - 1].Value;
+                                        // Check if it's a valid double format
+                                        if (Double.TryParse(s, out double filament))
                                         {
-                                            case "cm":
-                                                filament *= 10;
-                                                break;
-                                            case "km":
-                                                filament = filament * 1000 * 100 * 10;
-                                                break;
-                                            case "m":
-                                                filament = filament * 100 * 10;
-                                                break;
-                                            // Nothing to do here, already in meters
-                                            case "mm":
-                                            default:
-                                                break;
+                                            // Filament is al
+                                            filament = Convert.ToDouble(s, CultureInfo.GetCultureInfo("en-US"));
+                                            switch (stringUnit)
+                                            {
+                                                case "cm":
+                                                    filament *= 10;
+                                                    break;
+                                                case "km":
+                                                    filament = filament * 1000 * 100 * 10;
+                                                    break;
+                                                case "m":
+                                                    filament = filament * 100 * 10;
+                                                    break;
+                                                // Nothing to do here, already in meters
+                                                case "mm":
+                                                default:
+                                                    break;
+                                            }
+                                            filamentLength.Add(filament);
                                         }
-                                        filamentLength.Add(filament);
                                     }
                                 }
                                 if (filamentLength.Count == 0)
