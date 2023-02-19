@@ -3,6 +3,7 @@ using AndreasReitberger.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using AndreasReitberger.API.OctoPrint.Models;
 
 #if NETFRAMEWORK
 using HelixToolkit.Wpf;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net472</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net472;net6;net7</TargetFrameworks>
     <AssemblyName>GcodeParserSharp</AssemblyName>
     <RootNamespace>AndreasReitberger</RootNamespace>
     <Authors>Andreas Reitberger</Authors>
@@ -10,21 +10,19 @@
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
     <PackageProjectUrl>https://github.com/AndreasReitberger/GcodeParserSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.8</Version>
-    <AssemblyVersion>1.0.8.0</AssemblyVersion>
-    <LangVersion>9.0</LangVersion>
+    <Version>1.0.9</Version>
+    <LangVersion>10.0</LangVersion>
     <RepositoryUrl>https://github.com/AndreasReitberger/GcodeParserSharp</RepositoryUrl>
-    <FileVersion>1.0.8.0</FileVersion>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HelixToolkit" Version="2.21.1" />
-    <PackageReference Include="HelixToolkit.Wpf" Version="2.21.1" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.21.1" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="OctoPrintSharpApi" Version="1.1.7" />
-    <PackageReference Include="RCoreSharp" Version="1.0.7" />
+    <PackageReference Include="HelixToolkit" Version="2.23.0" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.23.0" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.23.0" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.2.1" />
+    <PackageReference Include="RCoreSharp" Version="1.0.8" />
     <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
