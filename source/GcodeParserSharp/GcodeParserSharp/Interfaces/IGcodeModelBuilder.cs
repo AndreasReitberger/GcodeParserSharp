@@ -1,12 +1,16 @@
-﻿#if NETFRAMEWORK
-
+﻿#if NETFRAMEWORK || NET6_0_OR_GREATER
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using AndreasReitberger.Models;
+
+#if NETFRAMEWORK
 using HelixToolkit.Wpf;
 using HelixToolkit.Wpf.SharpDX;
+#elif NET6_0_OR_GREATER
+using HelixToolkit.Wpf;
+using HelixToolkit.SharpDX.Core;
+#endif
 
 namespace AndreasReitberger.Interfaces
 {
