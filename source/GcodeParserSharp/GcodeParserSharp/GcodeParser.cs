@@ -260,7 +260,7 @@ namespace AndreasReitberger
                     {
                         try
                         {
-                            if(line == "G28 X Y")
+                            if (line == "G28 X Y")
                             {
 
                             }
@@ -1580,7 +1580,7 @@ namespace AndreasReitberger
                                     {
                                         filamentUsages.Add(line);
                                     }
-                                    for(int i = 0; i < filamentUsages.Count; i++)
+                                    for (int i = 0; i < filamentUsages.Count; i++)
                                     {
                                         //string s = Regex.Match(filamentUsages[i], @"(?<=:\s)(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
                                         string s = Regex.Match(filamentUsages[i], @"(\d+(\.\d+)?)|(\.\d+)").Groups[1].Value;
