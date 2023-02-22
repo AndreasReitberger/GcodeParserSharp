@@ -8,6 +8,9 @@ using AndreasReitberger.API.OctoPrint.Models;
 #if NETFRAMEWORK
 using HelixToolkit.Wpf;
 using HelixToolkit.Wpf.SharpDX;
+#elif NET6_0_OR_GREATER
+using HelixToolkit.Wpf;
+using HelixToolkit.SharpDX.Core;
 #endif
 
 namespace AndreasReitberger.Models
@@ -395,7 +398,7 @@ namespace AndreasReitberger.Models
         }
         #endregion
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NET6_0_OR_GREATER
         #region Model
         List<LinesVisual3D> _modelLayers = new();
         public List<LinesVisual3D> ModelLayers
@@ -445,7 +448,7 @@ namespace AndreasReitberger.Models
 
         #region Public
 
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NET6_0_OR_GREATER
         public LineBuilder GetGcodeLayerLineBuilder(int LayerNumber)
         {
             var lineBuilder = new LineBuilder();
