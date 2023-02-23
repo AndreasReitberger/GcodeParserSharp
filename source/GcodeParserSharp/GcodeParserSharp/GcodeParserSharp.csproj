@@ -28,4 +28,11 @@
     <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference
+		Include="..\HelixToolkit.SharpDX.Core.Assimp.Wrapper\HelixToolkit.SharpDX.Core.Assimp.Wrapper.csproj"
+		Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))"
+		/>
+  </ItemGroup>
+
 </Project>

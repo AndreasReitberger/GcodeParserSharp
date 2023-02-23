@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GcodeParserSharp", "GcodeParserSharp\GcodeParserSharp.csproj", "{668EBFEA-F41C-4693-ACB7-7B6E333B28B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GcodeParserSharp.Test", "GcodeParserSharp.Test\GcodeParserSharp.Test.csproj", "{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelixToolkit.SharpDX.Core.Assimp.Wrapper", "HelixToolkit.SharpDX.Core.Assimp.Wrapper\HelixToolkit.SharpDX.Core.Assimp.Wrapper.csproj", "{67410A38-32CC-43C1-B29A-75395547D8A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75CA5280-E8B9-44C6-B36B-6C4771C2D41D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67410A38-32CC-43C1-B29A-75395547D8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67410A38-32CC-43C1-B29A-75395547D8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67410A38-32CC-43C1-B29A-75395547D8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67410A38-32CC-43C1-B29A-75395547D8A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
