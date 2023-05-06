@@ -496,7 +496,7 @@ namespace AndreasReitberger
                                 gcode.FilamentTypes = new List<string>
                                 {
                                     gcode.FilamentType
-                                };                                
+                                };
                             }
                         }
                         else

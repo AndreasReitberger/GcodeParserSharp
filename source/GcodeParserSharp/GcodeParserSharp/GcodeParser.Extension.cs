@@ -58,7 +58,7 @@ namespace AndreasReitberger
                 string s = pattern != null
                     ? pattern.Match(line).Groups[1].Value
                     : line.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Trim();
-                elements.Add(s);        
+                elements.Add(s);
             }
             if (elements.Count == 0) return default;
             return elements.Count > 1 ? string.Join(joinChar, elements) : elements.FirstOrDefault().ToString();
