@@ -118,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Gcodes\BambuStudio.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Gcodes\Cura.gcode">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

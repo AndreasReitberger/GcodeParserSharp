@@ -15,6 +15,7 @@ namespace GcodeParserSharp.Test
     {
         public List<string> testfiles = new List<string>()
         {
+            @"Gcodes\BambuStudio.gcode",
             @"Gcodes\PrusaSlicer2.gcode",
             @"Gcodes\OrcaSlicer.gcode",
             @"Gcodes\Cura.gcode",
@@ -31,15 +32,7 @@ namespace GcodeParserSharp.Test
             {
                 Console.WriteLine($"Parsed: {percent}%");
             });
-            GcodeParser.Instance.SupportedSlicers = new List<SlicerInfo>()
-            {
-                new SlicerInfo() { SlicerName = SlicerName.OrcaSlicer, RepositoryUri = "https://github.com/SoftFever/OrcaSlicer" },
-                new SlicerInfo() { SlicerName = SlicerName.Cura },
-                new SlicerInfo() { SlicerName = SlicerName.FlashForge },
-                new SlicerInfo() { SlicerName = SlicerName.PrusaSlicer },
-                new SlicerInfo() { SlicerName = SlicerName.Simplify3D },
-                new SlicerInfo() { SlicerName = SlicerName.IdeaMaker },
-            };
+            GcodeParser.Instance.SupportedSlicers = GcodeParserGlobalStaticConfig.SupportedSlicersForCommentRead;
             GcodeParser.Instance.Error += (a, b) =>
             {
                 Console.WriteLine($"Exception: {b}");

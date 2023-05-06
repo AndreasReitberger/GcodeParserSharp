@@ -16,5 +16,6 @@
         Voxelizer2,
         CraftWare,
         OrcaSlicer,
+        BambuStudio,
     }
 }
