@@ -5,6 +5,7 @@
         Volume,
         PrintTime,
         PrintTimeSilent,
+        PrintTimeModel,
         FilamentUsed,
         FilamentDiameter,
         FilamentType,
