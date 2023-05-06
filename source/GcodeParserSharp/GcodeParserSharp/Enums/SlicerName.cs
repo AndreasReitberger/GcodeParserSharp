@@ -15,5 +15,6 @@
         IdeaMaker,
         Voxelizer2,
         CraftWare,
+        OrcaSlicer,
     }
 }

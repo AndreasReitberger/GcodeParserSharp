@@ -124,10 +124,16 @@
     <None Include="Gcodes\IdeaMaker.gcode">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Gcodes\OrcaSlicer.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Gcodes\PrusaSlicer.gcode">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Gcodes\FlashForge.gcode">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Gcodes\PrusaSlicer2.gcode">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Gcodes\Simplify3D.gcode">

@@ -1,4 +1,5 @@
 ﻿using AndreasReitberger;
+using AndreasReitberger.Enums;
 using AndreasReitberger.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -14,6 +15,8 @@ namespace GcodeParserSharp.Test
     {
         public List<string> testfiles = new List<string>()
         {
+            @"Gcodes\PrusaSlicer2.gcode",
+            @"Gcodes\OrcaSlicer.gcode",
             @"Gcodes\Cura.gcode",
             @"Gcodes\PrusaSlicer.gcode",
             @"Gcodes\FlashForge.gcode",
@@ -30,11 +33,12 @@ namespace GcodeParserSharp.Test
             });
             GcodeParser.Instance.SupportedSlicers = new List<SlicerInfo>()
             {
-                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.Cura },
-                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.FlashForge },
-                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.PrusaSlicer },
-                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.Simplify3D },
-                new SlicerInfo() { SlicerName = AndreasReitberger.Enums.SlicerName.IdeaMaker },
+                new SlicerInfo() { SlicerName = SlicerName.OrcaSlicer, RepositoryUri = "https://github.com/SoftFever/OrcaSlicer" },
+                new SlicerInfo() { SlicerName = SlicerName.Cura },
+                new SlicerInfo() { SlicerName = SlicerName.FlashForge },
+                new SlicerInfo() { SlicerName = SlicerName.PrusaSlicer },
+                new SlicerInfo() { SlicerName = SlicerName.Simplify3D },
+                new SlicerInfo() { SlicerName = SlicerName.IdeaMaker },
             };
             GcodeParser.Instance.Error += (a, b) =>
             {

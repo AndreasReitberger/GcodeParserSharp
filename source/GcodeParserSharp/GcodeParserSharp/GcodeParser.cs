@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AndreasReitberger
 {
-    public class GcodeParser : BaseModel
+    public partial class GcodeParser : BaseModel
     {
         #region Instance
         static GcodeParser _instance = null;
@@ -485,7 +485,19 @@ namespace AndreasReitberger
                         string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.FilamentType, comments);
                         if (parameter != "unkown_parameter")
                         {
-                            gcode.FilamentType = parameter;
+                            if (parameter.Contains("|"))
+                            {
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                gcode.FilamentTypes.AddRange(parts);
+                            }
+                            else
+                            {
+                                gcode.FilamentType = parameter;
+                                gcode.FilamentTypes = new List<string>
+                                {
+                                    gcode.FilamentType
+                                };                                
+                            }
                         }
                         else
                             gcode.FilamentType = string.Empty;
@@ -514,7 +526,6 @@ namespace AndreasReitberger
                                 if (value != -1)
                                 {
                                     gcode.FilamentDensity = value;
-
                                     gcode.FilamentDensities = new List<double>
                                     {
                                         gcode.FilamentDensity
@@ -547,7 +558,6 @@ namespace AndreasReitberger
                                 if (value != -1)
                                 {
                                     gcode.FilamentUsed = Math.Round(value, 2);
-
                                     gcode.FilamentUsage = new List<double>
                                     {
                                         gcode.FilamentUsed
@@ -1254,6 +1264,8 @@ namespace AndreasReitberger
                     return SlicerName.Voxelizer2;
                 else if (slicerLine.Contains("CraftWare"))
                     return SlicerName.CraftWare;
+                else if (slicerLine.Contains("OrcaSlicer"))
+                    return SlicerName.OrcaSlicer;
                 else
                 {
                     continue;
@@ -1270,7 +1282,6 @@ namespace AndreasReitberger
                 string unknown = "unkown_parameter";
                 switch (Slicer)
                 {
-                    // Old Prusa Slicer
                     case SlicerName.Slic3r:
                         switch (Parameter)
                         {
@@ -1305,14 +1316,17 @@ namespace AndreasReitberger
                             default:
                                 return unknown;
                         }
-                    // New Prusa Slicer
                     case SlicerName.PrusaSlicer:
                         switch (Parameter)
                         {
                             case SlicerParameter.Volume:
                                 myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
-                                return Regex.Match(lines[0], @"(\s\d*.\d)").Groups[1].Value;
+                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
+                            case SlicerParameter.FilamentUsed:
+                                myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.PrintTime:
                                 //myregex = new Regex(@"[;]\s*estimated printing time \(normal mode\)\s*=\s*\d*h\s*\d*m\s*\d*s");
                                 myregex = new Regex(@"[;]\s*estimated printing time \(normal mode\)\s*=*");
@@ -1341,7 +1355,57 @@ namespace AndreasReitberger
                             default:
                                 return unknown;
                         }
-                    // Simplify3D
+                    case SlicerName.OrcaSlicer:
+                        switch (Parameter)
+                        {
+                            case SlicerParameter.Volume:
+                                myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
+                            case SlicerParameter.FilamentUsed:
+                                myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
+                            case SlicerParameter.PrintTime:
+                                //myregex = new Regex(@"[;]\s*estimated printing time \(normal mode\)\s*=\s*\d*h\s*\d*m\s*\d*s");
+                                myregex = new Regex(@"[;]\s*total estimated time\s*=*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                // Result looks like, we need the second paramater "; model printing time: 8m 6s; total estimated time: 15m 26s"
+                                string targetTotalPrintTime = lines.FirstOrDefault()?.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim();
+                                return Regex.Match(targetTotalPrintTime, @"((\d*d\s\d*h\s*\d*m\s\d*s)|(\d*h\s*\d*m\s\d*s)|(\d*m\s\d*s)|(\d{1,}s))").Groups[1].Value;
+                            case SlicerParameter.PrintTimeModel:
+                                myregex = new Regex(@"[;]\s*model printing time\s*=*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                // Result looks like, we need the second paramater "; model printing time: 8m 6s; total estimated time: 15m 26s"
+                                string targetModelPrintTime = lines.FirstOrDefault()?.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim();
+                                return Regex.Match(targetModelPrintTime, @"((\d*d\s\d*h\s*\d*m\s\d*s)|(\d*h\s*\d*m\s\d*s)|(\d*m\s\d*s)|(\d{1,}s))").Groups[1].Value;
+                            case SlicerParameter.FilamentDiameter:
+                                // ; filament_diameter = 1.75,1.75,1.75
+                                myregex = new Regex(@"[;]\s*filament_diameter\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                Regex pattern = new(@"(?<=)(\d+(\.\d+)?)|(\.\d+)");
+                                string filamentDiameters = ConcatNumericDataString(lines.FirstOrDefault(), ",", CultureInfo.GetCultureInfo("en-US"), pattern);
+                                return filamentDiameters;
+                            case SlicerParameter.NozzleDiameter:
+                                // ; nozzle_diameter = 0.4
+                                myregex = new Regex(@"[;]\s*nozzle_diameter\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                return Regex.Match(lines[0], @"([^ =\s](\d*.\d{1,2}))").Groups[1].Value;
+                            case SlicerParameter.FilamentType:
+                                myregex = new Regex(@"[;]\s*filament_type\s*=\s*([A-Z])*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                string filamentTypes = ConcatDataString(lines.FirstOrDefault(), ";", CultureInfo.GetCultureInfo("en-US"));
+                                return filamentTypes;
+                            case SlicerParameter.FilamentDensity:
+                                // ; filament_density = 1.08,1.08,1.08
+                                myregex = new Regex(@"[;]\s*filament_density\s*=\s*\d*.\d*");
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                Regex patternDensity = new(@"(?<=)(\d+(\.\d+)?)|(\.\d+)");
+                                string filamenDensities = ConcatNumericDataString(lines.FirstOrDefault(), ",", CultureInfo.GetCultureInfo("en-US"), patternDensity);
+                                return filamenDensities;
+                            default:
+                                return unknown;
+                        }
                     case SlicerName.Simplify3D:
                         switch (Parameter)
                         {
@@ -1377,7 +1441,6 @@ namespace AndreasReitberger
                             default:
                                 return unknown;
                         }
-                    // Voxelizer 2
                     case SlicerName.Voxelizer2:
                         VoxelizerSingleGcodeInfo gInfo = new();
                         try
@@ -1448,7 +1511,6 @@ namespace AndreasReitberger
                             default:
                                 return unknown;
                         }
-
                     case SlicerName.CraftWare:
                         switch (Parameter)
                         {
@@ -1504,7 +1566,6 @@ namespace AndreasReitberger
                                 }
                                 else
                                     return printT.ToString();
-
                             case SlicerParameter.FilamentDensity:
                                 myregex = new Regex(@"[;]Filament Density #\d:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
@@ -1562,7 +1623,6 @@ namespace AndreasReitberger
                                 }
                                 else
                                     return printT.ToString();
-
                             case SlicerParameter.FilamentUsed:
                                 myregex = new Regex(@"[;]Filament used:\w*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();

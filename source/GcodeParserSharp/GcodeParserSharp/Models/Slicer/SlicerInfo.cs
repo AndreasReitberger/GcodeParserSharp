@@ -12,6 +12,7 @@ namespace AndreasReitberger.Models
         public string InstallationPath { get; set; }
 
         public string DownloadUri { get; set; }
+        public string RepositoryUri { get; set; }
         #endregion
 
         #region Override

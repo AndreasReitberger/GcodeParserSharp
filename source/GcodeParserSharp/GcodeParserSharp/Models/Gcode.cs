@@ -284,6 +284,19 @@ namespace AndreasReitberger.Models
             }
         }
 
+        List<string> _filamentTypes = new();
+        public List<string> FilamentTypes
+        {
+            get => _filamentTypes;
+            set
+            {
+                if (_filamentTypes == value)
+                    return;
+                _filamentTypes = value;
+                OnPropertyChanged();
+            }
+        }
+
         double _filamentDensity;
         public double FilamentDensity
         {
