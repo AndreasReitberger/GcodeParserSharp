@@ -1,6 +1,6 @@
 ﻿namespace AndreasReitberger.Models
 {
-    public class GcodeCommandLine
+    public partial class GcodeCommandLine
     {
         #region Properties
         public bool IsComplete { get; set; } = false;

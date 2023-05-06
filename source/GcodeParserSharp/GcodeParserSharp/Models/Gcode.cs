@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using AndreasReitberger.API.OctoPrint.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 #if NETFRAMEWORK
 using HelixToolkit.Wpf;
@@ -15,427 +16,124 @@ using HelixToolkit.SharpDX.Core;
 
 namespace AndreasReitberger.Models
 {
-    public class Gcode : BaseModel
+    public partial class Gcode : BaseModel
     {
         #region Properties
 
         #region General
-        Guid _id = Guid.Empty;
-        public Guid Id
-        {
-            get => _id;
-            set
-            {
-                if (_id == value) return;
-                _id = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        Guid id = Guid.Empty;
 
-        bool _isValid = false;
-        public bool IsValid
-        {
-            get => _isValid;
-            set
-            {
-                if (_isValid == value) return;
-                _isValid = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        bool isValid = false;
 
-        bool _isOctoPrintGcodeAnalysis = false;
-        public bool IsOctoPrintGcodeAnalysis
-        {
-            get => _isOctoPrintGcodeAnalysis;
-            set
-            {
-                if (_isOctoPrintGcodeAnalysis == value) return;
-                _isOctoPrintGcodeAnalysis = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        bool isOctoPrintGcodeAnalysis = false;
 
-        bool _isWorking = false;
-        public bool IsWorking
-        {
-            get => _isWorking;
-            set
-            {
-                if (_isWorking == value) return;
-                _isWorking = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        bool isWorking = false;
 
-        int _progress = 0;
-        public int Progress
-        {
-            get => _progress;
-            set
-            {
-                if (_progress == value) return;
-                _progress = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        int progress = 0;
 
-        int _processOrder = 0;
-        public int ProcessOrder
-        {
-            get => _processOrder;
-            set
-            {
-                if (_processOrder == value) return;
-                _processOrder = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        int processOrder = 0;
 
         #endregion
 
         #region ParserInformation
-        TimeSpan _parsingDuration;
-        public TimeSpan ParsingDuration
-        {
-            get => _parsingDuration;
-            set
-            {
-                if (_parsingDuration == value) return;
-                _parsingDuration = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        TimeSpan parsingDuration;
 
-        Dictionary<double, int> _zHeights = new();
-        public Dictionary<double, int> ZHeights
-        {
-            get => _zHeights;
-            set
-            {
-                if (_zHeights == value) return;
-                _zHeights = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        Dictionary<double, int> zHeights = new();
+
         #endregion
 
         #region GcodeInformation
-        SlicerName _slicerName = SlicerName.Unkown;
-        public SlicerName SlicerName
-        {
-            get => _slicerName;
-            set
-            {
-                if (_slicerName == value) return;
-                _slicerName = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        SlicerName slicerName = SlicerName.Unkown;
 
-        string _fileName;
-        public string FileName
-        {
-            get => _fileName;
-            set
-            {
-                if (_fileName == value) return;
-                _fileName = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        string fileName;
 
-        string _filePath;
-        public string FilePath
-        {
-            get => _filePath;
-            set
-            {
-                if (_filePath == value) return;
-                _filePath = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        string filePath;
 
-        bool _layerModelGenerated = false;
-        public bool LayerModelGenerated
-        {
-            get => _layerModelGenerated;
-            set
-            {
-                if (value == _layerModelGenerated) return;
-                _layerModelGenerated = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        bool layerModelGenerated = false;
 
-        List<double> _filamentUsage = new();
-        public List<double> FilamentUsage
-        {
-            get => _filamentUsage;
-            set
-            {
-                if (_filamentUsage == value) return;
-                _filamentUsage = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<double> filamentUsage = new();
 
-        List<double> _filamentDiameters = new();
-        public List<double> FilamentDiameters
-        {
-            get => _filamentDiameters;
-            set
-            {
-                if (_filamentDiameters == value) return;
-                _filamentDiameters = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<double> filamentDiameters = new();
 
-        List<double> _filamentDensities = new();
-        public List<double> FilamentDensities
-        {
-            get => _filamentDensities;
-            set
-            {
-                if (_filamentDensities == value) return;
-                _filamentDensities = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<double> filamentDensities = new();
 
-        List<double> _nozzleDiameters = new();
-        public List<double> NozzleDiameters
-        {
-            get => _nozzleDiameters;
-            set
-            {
-                if (_nozzleDiameters == value) return;
-                _nozzleDiameters = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<double> nozzleDiameters = new();
 
-        double _filamentUsed = 0;
-        /// <summary>Gets the filament used in "mm"</summary>
-        /// <value>The filament used.</value>
-        public double FilamentUsed
-        {
-            get => _filamentUsed;
-            set
-            {
-                if (_filamentUsed == value)
-                    return;
-                _filamentUsed = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double filamentUsed = 0;
 
-        double _filamentDiameter = 1.75f;
-        public double FilamentDiameter
-        {
-            get => _filamentDiameter;
-            set
-            {
-                if (_filamentDiameter == value)
-                    return;
-                _filamentDiameter = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double filamentDiameter = 1.75f;
 
-        double _extrudedFilamentVolume;
-        public double ExtrudedFilamentVolume
-        {
-            get => _extrudedFilamentVolume;
-            set
-            {
-                if (_extrudedFilamentVolume == value)
-                    return;
-                _extrudedFilamentVolume = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double extrudedFilamentVolume;
 
-        double _printTime;
-        public double PrintTime
-        {
-            get => _printTime;
-            set
-            {
-                if (_printTime == value)
-                    return;
-                _printTime = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double printTime;
 
-        string _filamentType;
-        public string FilamentType
-        {
-            get => _filamentType;
-            set
-            {
-                if (_filamentType == value)
-                    return;
-                _filamentType = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        string filamentType;
 
-        List<string> _filamentTypes = new();
-        public List<string> FilamentTypes
-        {
-            get => _filamentTypes;
-            set
-            {
-                if (_filamentTypes == value)
-                    return;
-                _filamentTypes = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<string> filamentTypes = new();
 
-        double _filamentDensity;
-        public double FilamentDensity
-        {
-            get => _filamentDensity;
-            set
-            {
-                if (_filamentDensity == value)
-                    return;
-                _filamentDensity = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double filamentDensity;
 
-        double _filamentWeight;
-        public double FilamentWeight
-        {
-            get => _filamentWeight;
-            set
-            {
-                if (_filamentWeight == value)
-                    return;
-                _filamentWeight = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double filamentWeight;
 
-        double _NozzleDiameter;
-        public double NozzleDiameter
-        {
-            get => _NozzleDiameter;
-            set
-            {
-                if (_NozzleDiameter == value)
-                    return;
-                _NozzleDiameter = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double nozzleDiameter;
 
-        double _width = 0;
-        public double Width
-        {
-            get => _width;
-            set
-            {
-                if (_width == value) return;
-                _width = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double width = 0;
 
-        double _depth = 0;
-        public double Depth
-        {
-            get => _depth;
-            set
-            {
-                if (_depth == value) return;
-                _depth = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double depth = 0;
 
-        double _height = 0;
-        public double Height
-        {
-            get => _height;
-            set
-            {
-                if (_height == value) return;
-                _height = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        double height = 0;
 
-        int _layers = 0;
-        public int Layers
-        {
-            get => _layers;
-            set
-            {
-                if (_layers == value) return;
-                _layers = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        int layers = 0;
+
         #endregion
 
         #region Commands & Comments
-        List<List<GcodeCommandLine>> _commands = new();
-        public List<List<GcodeCommandLine>> Commands
-        {
-            get => _commands;
-            set
-            {
-                if (_commands == value) return;
-                _commands = value;
-                OnPropertyChanged();
-            }
-        }
 
-        List<string> _comments = new();
-        public List<string> Comments
-        {
-            get => _comments;
-            set
-            {
-                if (_comments == value) return;
-                _comments = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<List<GcodeCommandLine>> commands = new();
+
+        [ObservableProperty]
+        List<string> comments = new();
         #endregion
 
 #if NETFRAMEWORK || NET6_0_OR_GREATER
         #region Model
-        List<LinesVisual3D> _modelLayers = new();
-        public List<LinesVisual3D> ModelLayers
-        {
-            get => _modelLayers;
-            set
-            {
-                if (_modelLayers == value) return;
-                _modelLayers = value;
-                OnPropertyChanged();
-            }
-        }
 
-        List<LineBuilder> _model3d = new();
-        public List<LineBuilder> Model3D
-        {
-            get => _model3d;
-            set
-            {
-                if (_model3d == value) return;
-                _model3d = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        List<LinesVisual3D> modelLayers = new();
+
+        [ObservableProperty]
+        List<LineBuilder> model3d = new();
+
         #endregion
 #endif
         #endregion
@@ -464,9 +162,9 @@ namespace AndreasReitberger.Models
 #if NETFRAMEWORK || NET6_0_OR_GREATER
         public LineBuilder GetGcodeLayerLineBuilder(int LayerNumber)
         {
-            var lineBuilder = new LineBuilder();
-            if (LayerNumber < Model3D.Count)
-                lineBuilder = Model3D[LayerNumber];              
+            LineBuilder lineBuilder = new();
+            if (LayerNumber < Model3d.Count)
+                lineBuilder = Model3d[LayerNumber];              
 
             return lineBuilder;
         }

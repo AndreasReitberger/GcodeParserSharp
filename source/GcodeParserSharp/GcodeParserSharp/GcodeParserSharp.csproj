@@ -24,15 +24,12 @@
     <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.23.0" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
     <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.23.0" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
     <PackageReference Include="OctoPrintSharpApi" Version="1.2.1" />
-    <PackageReference Include="RCoreSharp" Version="1.0.8" />
+    <PackageReference Include="RCoreSharp" Version="1.0.9" />
     <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference
-		Include="..\HelixToolkit.SharpDX.Core.Assimp.Wrapper\HelixToolkit.SharpDX.Core.Assimp.Wrapper.csproj"
-		Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))"
-		/>
+    <ProjectReference Include="..\HelixToolkit.SharpDX.Core.Assimp.Wrapper\HelixToolkit.SharpDX.Core.Assimp.Wrapper.csproj" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
   </ItemGroup>
 
 </Project>
