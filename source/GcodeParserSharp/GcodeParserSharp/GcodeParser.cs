@@ -2,6 +2,7 @@
 using AndreasReitberger.Core.Utilities;
 using AndreasReitberger.Enums;
 using AndreasReitberger.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -45,70 +46,20 @@ namespace AndreasReitberger
         #endregion
 
         #region Properties
-        CultureInfo _cultureInfo;
-        public CultureInfo CultureInfo
-        {
-            get => _cultureInfo;
-            set
-            {
-                if (_cultureInfo == value) return;
-                _cultureInfo = value;
-                OnPropertyChanged();
-            }
-        }
 
-        SlicerPrinterConfiguration _config;
-        public SlicerPrinterConfiguration Config
-        {
-            get => _config;
-            set
-            {
-                if (_config == value) return;
-                _config = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        CultureInfo cultureInfo;
 
-        List<SlicerInfo> _supportedSlicers = new();
-        public List<SlicerInfo> SupportedSlicers
-        {
-            get => _supportedSlicers;
-            set
-            {
-                if (_supportedSlicers == value) return;
-                _supportedSlicers = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        SlicerPrinterConfiguration config;
 
-        TimeSpan _lastParsingDuration;
-        public TimeSpan LastParsingDuration
-        {
-            get => _lastParsingDuration;
-            set
-            {
-                if (_lastParsingDuration == value) return;
-                _lastParsingDuration = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
+        [ObservableProperty]
+        List<SlicerInfo> supportedSlicers = new();
 
-        #region EventHandlers
-        public event EventHandler Error;
-        protected virtual void OnError()
-        {
-            Error?.Invoke(this, EventArgs.Empty);
-        }
-        protected virtual void OnError(ErrorEventArgs e)
-        {
-            Error?.Invoke(this, e);
-        }
-        protected virtual void OnError(UnhandledExceptionEventArgs e)
-        {
-            Error?.Invoke(this, e);
-        }
-        #endregion
+        [ObservableProperty]
+        TimeSpan lastParsingDuration;
+
+        #endregion     
 
         #region Constructor
         public GcodeParser()

@@ -1,6 +1,6 @@
 ﻿namespace AndreasReitberger.Models
 {
-    public class GcodeLineProcessResult
+    public partial class GcodeLineProcessResult
     {
         #region Properties
         public bool ValidX { get; set; } = false;

@@ -1,6 +1,9 @@
-﻿namespace AndreasReitberger.Models
+﻿using AndreasReitberger.Core.Utilities;
+using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace AndreasReitberger.Models
 {
-    public class SlicerPrinterConfiguration
+    public partial class SlicerPrinterConfiguration : BaseModel
     {
         #region  Default
         public static SlicerPrinterConfiguration Default = new()
@@ -17,13 +20,20 @@
 
         #region Properties
 
-        public string PrinterName { get; set; }
-        public double AMax_xy { get; set; }
-        public double AMax_z { get; set; }
-        public double AMax_e { get; set; }
-        public double AMax_eExtrude { get; set; }
-        public double AMax_eRetract { get; set; }
-        public double PrintDurationCorrection { get; set; } = 1;
+        [ObservableProperty]
+        string printerName = string.Empty;
+        [ObservableProperty]
+        double aMax_xy;
+        [ObservableProperty]
+        double aMax_z;
+        [ObservableProperty]
+        double aMax_e;
+        [ObservableProperty]
+        double aMax_eExtrude;
+        [ObservableProperty]
+        double aMax_eRetract;
+        [ObservableProperty]
+        double printDurationCorrection = 1;
 
         #endregion
 
@@ -35,11 +45,8 @@
                 return false;
             return PrinterName.Equals(item.PrinterName);
         }
-        public override int GetHashCode()
-        {
-            return PrinterName.GetHashCode();
-        }
-
+        public override int GetHashCode() => PrinterName.GetHashCode();
+        
         #endregion
     }
 }

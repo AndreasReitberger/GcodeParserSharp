@@ -1,35 +1,38 @@
-﻿using AndreasReitberger.Enums;
+﻿using AndreasReitberger.Core.Utilities;
+using AndreasReitberger.Enums;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace AndreasReitberger.Models
 {
-    public class SlicerInfo
+    public partial class SlicerInfo : BaseModel
     {
         #region Properties
-        public Guid Id { get; set; }
-        public SlicerName SlicerName { get; set; } = SlicerName.Unkown;
+        [ObservableProperty]
+        Guid id;
+        [ObservableProperty]
+        SlicerName slicerName = SlicerName.Unkown;
 
-        public string InstallationPath { get; set; }
+        [ObservableProperty]
+        string installationPath;
 
-        public string DownloadUri { get; set; }
-        public string RepositoryUri { get; set; }
+        [ObservableProperty]
+        string downloadUri;
+        [ObservableProperty]
+        string repositoryUri;
         #endregion
 
         #region Override
-        public override string ToString()
-        {
-            return SlicerName.ToString();
-        }
+        public override string ToString() =>  SlicerName.ToString();
+        
         public override bool Equals(object obj)
         {
             if (obj is not SlicerInfo item)
                 return false;
             return Id.Equals(item.Id) || (this.SlicerName == item.SlicerName);
         }
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => Id.GetHashCode();
+        
         #endregion
     }
 }
