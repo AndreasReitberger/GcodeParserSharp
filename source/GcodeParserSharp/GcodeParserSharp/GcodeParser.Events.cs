@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace AndreasReitberger
+namespace AndreasReitberger.Parser.Gcode
 {
     public partial class GcodeParser
     {

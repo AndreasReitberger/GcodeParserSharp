@@ -1,8 +1,8 @@
-﻿using AndreasReitberger.Enums;
-using AndreasReitberger.Models;
+﻿using AndreasReitberger.Parser.Gcode.Enums;
+using AndreasReitberger.Parser.Gcode.Slicer;
 using System.Collections.Generic;
 
-namespace AndreasReitberger
+namespace AndreasReitberger.Parser.Gcode
 {
     public static class GcodeParserGlobalStaticConfig
     {

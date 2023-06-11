@@ -1,4 +1,4 @@
-﻿namespace AndreasReitberger.Models
+﻿namespace AndreasReitberger.Parser.Gcode
 {
     public partial class GcodeCommandLine
     {

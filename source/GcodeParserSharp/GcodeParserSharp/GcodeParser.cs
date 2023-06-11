@@ -1,7 +1,7 @@
 ﻿using AndreasReitberger.API.OctoPrint.Models;
 using AndreasReitberger.Core.Utilities;
-using AndreasReitberger.Enums;
-using AndreasReitberger.Models;
+using AndreasReitberger.Parser.Gcode.Enums;
+using AndreasReitberger.Parser.Gcode.Slicer;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json;
 using System;
@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AndreasReitberger
+namespace AndreasReitberger.Parser.Gcode
 {
     public partial class GcodeParser : BaseModel
     {

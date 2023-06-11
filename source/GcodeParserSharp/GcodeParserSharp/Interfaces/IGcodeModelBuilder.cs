@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AndreasReitberger.Models;
 
 #if NETFRAMEWORK
 using HelixToolkit.Wpf;
@@ -12,7 +11,7 @@ using HelixToolkit.Wpf;
 using HelixToolkit.SharpDX.Core;
 #endif
 
-namespace AndreasReitberger.Interfaces
+namespace AndreasReitberger.Parser.Gcode.Interfaces
 {
     public interface IGcodeModelBuilder
     {

@@ -1,4 +1,4 @@
-﻿using AndreasReitberger.Enums;
+﻿using AndreasReitberger.Parser.Gcode.Enums;
 using AndreasReitberger.Core.Utilities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using HelixToolkit.Wpf;
 using HelixToolkit.SharpDX.Core;
 #endif
 
-namespace AndreasReitberger.Models
+namespace AndreasReitberger.Parser.Gcode
 {
     public partial class Gcode : BaseModel
     {
