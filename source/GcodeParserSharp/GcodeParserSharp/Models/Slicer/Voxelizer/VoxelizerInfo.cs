@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace AndreasReitberger.Models
+namespace AndreasReitberger.Parser.Gcode.Slicer
 {
     public partial class VoxelizerInfo
     {

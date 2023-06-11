@@ -1,9 +1,9 @@
 ﻿using AndreasReitberger.Core.Utilities;
-using AndreasReitberger.Enums;
+using AndreasReitberger.Parser.Gcode.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
-namespace AndreasReitberger.Models
+namespace AndreasReitberger.Parser.Gcode.Slicer
 {
     public partial class SlicerInfo : BaseModel
     {

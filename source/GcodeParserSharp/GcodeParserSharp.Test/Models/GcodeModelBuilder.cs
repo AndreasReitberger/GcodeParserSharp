@@ -1,11 +1,10 @@
-﻿using AndreasReitberger.Interfaces;
-using AndreasReitberger.Models;
+﻿using AndreasReitberger.Parser.Gcode;
+using AndreasReitberger.Parser.Gcode.Interfaces;
 using HelixToolkit.Wpf;
 using HelixToolkit.Wpf.SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 

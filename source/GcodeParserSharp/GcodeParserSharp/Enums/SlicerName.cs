@@ -1,4 +1,4 @@
-﻿namespace AndreasReitberger.Enums
+﻿namespace AndreasReitberger.Parser.Gcode.Enums
 {
     public enum SlicerName
     {

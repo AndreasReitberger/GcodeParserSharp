@@ -1,7 +1,7 @@
 ﻿using AndreasReitberger.Core.Utilities;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace AndreasReitberger.Models
+namespace AndreasReitberger.Parser.Gcode.Slicer
 {
     public partial class SlicerPrinterConfiguration : BaseModel
     {

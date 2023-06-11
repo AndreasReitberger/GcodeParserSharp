@@ -1,6 +1,4 @@
-﻿using AndreasReitberger;
-using AndreasReitberger.Enums;
-using AndreasReitberger.Models;
+﻿using AndreasReitberger.Parser.Gcode;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
