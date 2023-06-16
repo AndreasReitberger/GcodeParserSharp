@@ -1,34 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <Import Project="..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>net6</TargetFramework>
-    <AssemblyName>GcodeParserSharp</AssemblyName>
+    <Id>GcodeParserSharp.Maui</Id>
+    <AssemblyName>GcodeParserSharp.Maui</AssemblyName>
     <RootNamespace>AndreasReitberger.Parser.Gcode</RootNamespace>
-    <Authors>Andreas Reitberger</Authors>
     <Description>A simple C# Gcode parser to read gcodes and get out the filament volume and estimated print time.</Description>
-    <Copyright>Andreas Reitberger</Copyright>
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
-    <PackageProjectUrl>https://github.com/AndreasReitberger/GcodeParserSharp</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.1</Version>
-    <LangVersion>10.0</LangVersion>
-    <RepositoryUrl>https://github.com/AndreasReitberger/GcodeParserSharp</RepositoryUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
-	<!--
-    <PackageReference Include="HelixToolkit" Version="2.24.0" />
-    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.24.0" />
-    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.24.0" />
-	-->
-    <PackageReference Include="OctoPrintSharpApi" Version="1.2.1" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.2.2" />
     <PackageReference Include="RCoreSharp" Version="1.0.9" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\OctoPrintRestApiSharp\source\OctoPrintSharpApi\OctoPrintSharpApi.csproj" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GcodeParserSharp.Test", "Gc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelixToolkit.SharpDX.Core.Assimp.Wrapper", "HelixToolkit.SharpDX.Core.Assimp.Wrapper\HelixToolkit.SharpDX.Core.Assimp.Wrapper.csproj", "{67410A38-32CC-43C1-B29A-75395547D8A0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C932AD49-95CE-43C6-8DBB-58572A99564C}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\common.props = ..\..\common.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
