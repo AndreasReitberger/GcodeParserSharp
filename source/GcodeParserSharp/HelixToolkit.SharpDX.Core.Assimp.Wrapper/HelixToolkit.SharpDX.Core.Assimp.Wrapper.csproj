@@ -1,12 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+	<Import Project="..\..\..\common.props" />
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+	<RootNamespace>AndreasReitberger.Parser.Gcode.Wrapper</RootNamespace>
+    <Description>A wrapper class in order to use the HelixToolkit.SharpDX.Assimp dependencies for net6 or higher applications.</Description>
+	<PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageReadmeFile>README_Wrapper.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit.SharpDX.Assimp" Version="2.24.0" />
+	  <None Include="..\..\..\README_Wrapper.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
