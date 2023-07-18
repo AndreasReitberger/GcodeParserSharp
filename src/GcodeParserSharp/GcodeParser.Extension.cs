@@ -39,10 +39,10 @@ namespace AndreasReitberger.Parser.Gcode
                     ? pattern.Match(line).Groups[1].Value
                     : line.Split(new string[] { "=" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault().Trim();
                 // Check if it's a valid double format
-                if (double.TryParse(s, out double diameter))
+                if (double.TryParse(s, out double numericValue))
                 {
-                    diameter = Convert.ToDouble(s, culture);
-                    elements.Add(diameter);
+                    numericValue = Convert.ToDouble(s, culture);
+                    elements.Add(numericValue);
                 }
             }
             if (elements.Count == 0) return default;

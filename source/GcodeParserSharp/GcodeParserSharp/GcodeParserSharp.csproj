@@ -9,6 +9,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.cs" Link="GcodeParser.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Extension.cs" Link="GcodeParser.Extension.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit" Version="2.24.0" />

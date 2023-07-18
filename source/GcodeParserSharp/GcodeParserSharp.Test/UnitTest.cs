@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace GcodeParserSharp.Test
     {
         public List<string> testfiles = new List<string>()
         {
+            @"C:\Users\Andreas\Desktop\Gcodes\BKG_ESP32_V4_ASA_25m48s.gcode",
             @"Gcodes\BambuStudio.gcode",
             @"Gcodes\PrusaSlicer2.gcode",
             @"Gcodes\OrcaSlicer.gcode",
@@ -28,12 +30,12 @@ namespace GcodeParserSharp.Test
         {
             var prog = new Progress<int>(percent =>
             {
-                Console.WriteLine($"Parsed: {percent}%");
+                Debug.WriteLine($"Parsed: {percent}%");
             });
             GcodeParser.Instance.SupportedSlicers = GcodeParserGlobalStaticConfig.SupportedSlicersForCommentRead;
             GcodeParser.Instance.Error += (a, b) =>
             {
-                Console.WriteLine($"Exception: {b}");
+                Debug.WriteLine($"Exception: {b}");
                 Assert.Fail(b.ToString());
             };
             foreach (string file in testfiles)
@@ -44,7 +46,7 @@ namespace GcodeParserSharp.Test
                     Gcode gcode = await GcodeParser.Instance.FromFileAsync(file, prog, cts.Token, true);
                     if (gcode != null)
                     {
-                        Console.WriteLine($"Gcode parsed in: {gcode.ParsingDuration}");
+                        Debug.WriteLine($"Gcode parsed in: {gcode.ParsingDuration}, Volume: {gcode.ExtrudedFilamentVolume}, PrintTime: {gcode.PrintTime}");
                         // Make sure that print time and volume is not 0 
                         Assert.IsTrue(gcode.PrintTime > 0 && gcode.ExtrudedFilamentVolume > 0);
                     }

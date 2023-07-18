@@ -527,10 +527,21 @@ namespace AndreasReitberger.Parser.Gcode
                         string parameter = GetParameterFromSlicer(gcode.SlicerName, SlicerParameter.Volume, comments);
                         if (parameter != "unkown_parameter")
                         {
-                            double value = Convert.ToDouble(parameter,
+                            if (parameter.Contains("|"))
+                            {
+                                string[] parts = parameter.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+                                gcode.ExtrudedFilamentVolume = (
+                                    parts.Select(part => Convert.ToDouble(part,
+                                    part.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"))))
+                                    .Sum();
+                            }
+                            else
+                            {
+                                double value = Convert.ToDouble(parameter,
                                 parameter.Contains(",") ? CultureInfo.GetCultureInfo("de-DE") : CultureInfo.GetCultureInfo("en-US"));
-                            if (value != -1)
-                                gcode.ExtrudedFilamentVolume = Math.Round(value, 2);
+                                if (value != -1)
+                                    gcode.ExtrudedFilamentVolume = Math.Round(value, 2);
+                            }                       
                         }
                         else
                         {
@@ -1230,6 +1241,7 @@ namespace AndreasReitberger.Parser.Gcode
         {
             try
             {
+                Regex numericPattern = new(@"(?<=)(\d+(\.\d+)?)|(\.\d+)");
                 Regex myregex;
                 List<string> lines = new();
                 string unknown = "unkown_parameter";
@@ -1314,7 +1326,12 @@ namespace AndreasReitberger.Parser.Gcode
                             case SlicerParameter.Volume:
                                 myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
-                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
+                                string vol = ConcatNumericDataString(
+                                    lines.FirstOrDefault()?.Replace("; filament used [cm3] = ", string.Empty), ",",
+                                    CultureInfo.GetCultureInfo("en-US"),
+                                    numericPattern);
+                                return vol;
+                                //return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.FilamentUsed:
                                 myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
@@ -1336,8 +1353,8 @@ namespace AndreasReitberger.Parser.Gcode
                                 // ; filament_diameter = 1.75,1.75,1.75
                                 myregex = new Regex(@"[;]\s*filament_diameter\s*=\s*\d*.\d*");
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
-                                Regex pattern = new(@"(?<=)(\d+(\.\d+)?)|(\.\d+)");
-                                string filamentDiameters = ConcatNumericDataString(lines.FirstOrDefault(), ",", CultureInfo.GetCultureInfo("en-US"), pattern);
+                                //Regex pattern = new(@"(?<=)(\d+(\.\d+)?)|(\.\d+)");
+                                string filamentDiameters = ConcatNumericDataString(lines.FirstOrDefault(), ",", CultureInfo.GetCultureInfo("en-US"), numericPattern);
                                 return filamentDiameters;
                             case SlicerParameter.NozzleDiameter:
                                 // ; nozzle_diameter = 0.4
