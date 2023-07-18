@@ -7,7 +7,7 @@
     <RootNamespace>AndreasReitberger.Parser.Gcode</RootNamespace>
     <Description>A simple C# Gcode parser to read gcodes and get out the filament volume and estimated print time.</Description>
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
