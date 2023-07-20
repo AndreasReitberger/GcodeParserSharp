@@ -348,6 +348,8 @@ namespace AndreasReitberger.Parser.Gcode
                 gcode.FilamentUsed = Math.Round(result.TotalFilament, 2);
                 gcode.ExtrudedFilamentVolume = Math.Round((((Math.PI * gcode.FilamentDiameter * gcode.FilamentDiameter) / 4f) * gcode.FilamentUsed / 1000f), 2);
 
+                gcode.Thumbnails = GetThumbnails(gcode.Comments);
+
                 if (useCommentRead && slicers != null)
                 {
                     // PrintTime
