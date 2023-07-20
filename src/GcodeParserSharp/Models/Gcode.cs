@@ -41,6 +41,11 @@ namespace AndreasReitberger.Parser.Gcode
 
         #endregion
 
+        #region Thumbnails
+        [ObservableProperty]
+        List<byte[]> thumbnails = new();
+        #endregion
+
         #region ParserInformation
         [ObservableProperty]
         TimeSpan parsingDuration;
@@ -151,7 +156,6 @@ namespace AndreasReitberger.Parser.Gcode
             FilePath = file.Path;
             FileName = file.Display;
             IsOctoPrintGcodeAnalysis = true;
-
         }
         #endregion
 

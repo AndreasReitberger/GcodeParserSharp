@@ -5,9 +5,8 @@ namespace GcodeSharpParser.Test
 {
     public class UnitTest1
     {
-        public List<string> testfiles = new List<string>()
+        public List<string> testfiles = new()
         {
-            @"C:\Users\Andreas\Desktop\Gcodes\BKG_ESP32_V4_ASA_25m48s.gcode",
             @"Gcodes\BambuStudio.gcode",
             @"Gcodes\PrusaSlicer2.gcode",
             @"Gcodes\OrcaSlicer.gcode",

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AndreasReitberger.Parser.Gcode
@@ -64,6 +65,43 @@ namespace AndreasReitberger.Parser.Gcode
             return elements.Count > 1 ? string.Join(joinChar, elements) : elements.FirstOrDefault().ToString();
         }
 
+        public List<byte[]> GetThumbnails(List<string> comments, string pattern = @"(?:^; thumbnail(?:_JPG)* begin \d+[x ]\d+ \d+)(?:\n|\r\n?)((?:.+(?:\n|\r\n?))+?)(?:^; thumbnail(?:_JPG)* end)")
+        {
+            // Pattern taken from: https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/blob/master/octoprint_prusaslicerthumbnails/__init__.py
+            //pattern = @"(?:^; thumbnail(?:_JPG)* begin \d+[x ]\d+ \d+)(?:\n|\r\n?)((?:.+(?:\n|\r\n?))+?)(?:^; thumbnail(?:_JPG)* end)";
+            List<byte[]> thumbnails = new();
+            string thumbnail = string.Join(Environment.NewLine, comments);
+            MatchCollection regex = Regex.Matches(thumbnail, pattern, RegexOptions.Multiline);
+            foreach (var match in regex)
+            {
+                string capture = match.ToString();
+                // Remove first and last line
+                //var p = capture?.Split("; ", StringSplitOptions.RemoveEmptyEntries);
+                capture = string
+                    .Join(
+                        string.Empty, capture?.Split("; ", StringSplitOptions.RemoveEmptyEntries)
+                        .Skip(1)
+                        .SkipLast(1)
+                    );
+                byte[] image = Base64StringToByteArray(capture);
+                if(image?.Length > 0)
+                    thumbnails.Add(image);          
+            }
+            return thumbnails;
+        }
+
+        public static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
+
+        public static byte[] Base64StringToByteArray(string hex)
+        {
+            return Convert.FromBase64String(hex);
+        }
         #endregion
     }
 }
