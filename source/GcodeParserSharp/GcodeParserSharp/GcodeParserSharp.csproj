@@ -9,13 +9,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);USE_HELIX</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\..\src\GcodeParserSharp\Enums\SlicerName.cs" Link="Enums\SlicerName.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\Enums\SlicerParameter.cs" Link="Enums\SlicerParameter.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.cs" Link="GcodeParser.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Events.cs" Link="GcodeParser.Events.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Extension.cs" Link="GcodeParser.Extension.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Regex.cs" Link="GcodeParser.Regex.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParserGlobalStaticConfig.cs" Link="GcodeParserGlobalStaticConfig.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\Models\Gcode.cs" Link="Models\Gcode.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\Models\GcodeCommandLine.cs" Link="Models\GcodeCommandLine.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\Models\GcodeLineProcessResult.cs" Link="Models\GcodeLineProcessResult.cs" />
   </ItemGroup>
 
   <ItemGroup>
