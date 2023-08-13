@@ -79,9 +79,17 @@ namespace AndreasReitberger.Parser.Gcode
                 //var p = capture?.Split("; ", StringSplitOptions.RemoveEmptyEntries);
                 capture = string
                     .Join(
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
                         string.Empty, capture?.Split("; ", StringSplitOptions.RemoveEmptyEntries)
+#else
+                        string.Empty, capture?.Split(new string[] { "; " } , StringSplitOptions.RemoveEmptyEntries)
+#endif
                         .Skip(1)
+#if NET6_0_OR_GREATER || NETSTANDARD2_1
                         .SkipLast(1)
+#else
+                        .Take(capture.Split(new string[] { "; " }, StringSplitOptions.RemoveEmptyEntries).Count() - 2)
+#endif
                     );
                 byte[] image = Base64StringToByteArray(capture);
                 if(image?.Length > 0)
@@ -102,6 +110,6 @@ namespace AndreasReitberger.Parser.Gcode
         {
             return Convert.FromBase64String(hex);
         }
-        #endregion
+#endregion
     }
 }
