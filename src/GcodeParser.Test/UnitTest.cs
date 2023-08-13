@@ -7,6 +7,7 @@ namespace GcodeSharpParser.Test
     {
         public List<string> testfiles = new()
         {
+            @"Gcodes\OrcaSlicer_Beta.gcode",
             @"Gcodes\BambuStudio.gcode",
             @"Gcodes\PrusaSlicer2.gcode",
             @"Gcodes\OrcaSlicer.gcode",

@@ -7,6 +7,7 @@
         PrintTimeSilent,
         PrintTimeModel,
         FilamentUsed,
+        FilamentWeight,
         FilamentDiameter,
         FilamentType,
         FilamentDensity,
