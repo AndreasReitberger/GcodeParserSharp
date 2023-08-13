@@ -1287,11 +1287,13 @@ namespace AndreasReitberger.Parser.Gcode
                         switch (Parameter)
                         {
                             case SlicerParameter.Volume:
-                                myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
+                                //myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
+                                myregex = FilamentVolume;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.FilamentUsed:
-                                myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                //myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                myregex = FilamentLength;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.PrintTime:
@@ -1326,7 +1328,8 @@ namespace AndreasReitberger.Parser.Gcode
                         switch (Parameter)
                         {
                             case SlicerParameter.Volume:
-                                myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
+                                //myregex = new Regex(@"[;]\s*filament used\s*\[cm3\]\s*=\s*\d*.\d*");
+                                myregex = FilamentVolume;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 string vol = ConcatNumericDataString(
                                     lines.FirstOrDefault()?.Replace("; filament used [cm3] = ", string.Empty), ",",
@@ -1335,12 +1338,19 @@ namespace AndreasReitberger.Parser.Gcode
                                 return vol;
                                 //return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.FilamentUsed:
-                                myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                //myregex = new Regex(@"[;]\s*filament used\s*\[mm\]\s*=\s*\d*.\d*");
+                                myregex = FilamentLength;
+                                lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
+                                return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
+                            case SlicerParameter.FilamentWeight:
+                                //myregex = new Regex(@"[;]\s*filament used\s*\[g\]\s*=\s*\d*.\d*");
+                                myregex = FilamentWeight;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 return Regex.Match(lines[0], @"(\s\d*.\d{1,2})").Groups[1].Value;
                             case SlicerParameter.PrintTime:
-                                //myregex = new Regex(@"[;]\s*estimated printing time \(normal mode\)\s*=\s*\d*h\s*\d*m\s*\d*s");
-                                myregex = new Regex(@"[;]\s*total estimated time\s*=*");
+                                //myregex = new Regex(@"[;]\s*total estimated time\s*=*");
+                                //myregex = new Regex(@"([;]\s*(total estimated time)|(estimated printing time)\s*=*)");
+                                myregex = PrintingTime;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 // Result looks like, we need the second paramater "; model printing time: 8m 6s; total estimated time: 15m 26s"
                                 string targetTotalPrintTime = lines.FirstOrDefault()?.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim();
@@ -1393,7 +1403,8 @@ namespace AndreasReitberger.Parser.Gcode
                             */
                             case SlicerParameter.PrintTime:
                                 //myregex = new Regex(@"[;]\s*estimated printing time \(normal mode\)\s*=\s*\d*h\s*\d*m\s*\d*s");
-                                myregex = new Regex(@"[;]\s*total estimated time\s*=*");
+                                //myregex = new Regex(@"[;]\s*total estimated time\s*=*");
+                                myregex = PrintingTime;
                                 lines = Lines.Where(line => !string.IsNullOrEmpty(line) && myregex.IsMatch(line)).ToList();
                                 // Result looks like, we need the second paramater "; model printing time: 8m 6s; total estimated time: 15m 26s"
                                 string targetTotalPrintTime = lines.FirstOrDefault()?.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim();
