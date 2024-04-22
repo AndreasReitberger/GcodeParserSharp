@@ -112,8 +112,8 @@ namespace AndreasReitberger.Parser.Gcode
 
             if (file.Statistics != null)
             {
-                if (file.Statistics.AveragePrintTime != null && file.Statistics.AveragePrintTime.Default > 0)
-                    temp.PrintTime = Math.Round(file.Statistics.AveragePrintTime.Default / 3600, 2);
+                if (file.Statistics.AveragePrintTime != null && file.Statistics.AveragePrintTime.DefaultValue > 0)
+                    temp.PrintTime = Math.Round(file.Statistics.AveragePrintTime.DefaultValue / 3600, 2);
                 else
                     temp.PrintTime = Math.Round(file.GcodeAnalysis.EstimatedPrintTime / 3600, 2);
             }

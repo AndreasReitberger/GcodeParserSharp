@@ -153,7 +153,7 @@ namespace AndreasReitberger.Parser.Gcode
         public Gcode(OctoPrintFile file)
         {
             Id = Guid.NewGuid();
-            FilePath = file.Path;
+            FilePath = file.FilePath;
             FileName = file.Display;
             IsOctoPrintGcodeAnalysis = true;
         }
