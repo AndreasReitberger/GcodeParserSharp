@@ -1,12 +1,11 @@
 using AndreasReitberger.Parser.Gcode;
-using Xunit.Sdk;
 
 namespace GcodeSharpParser.Test
 {
     public class UnitTest1
     {
-        public List<string> testfiles = new()
-        {
+        public List<string> testfiles =
+        [
             @"Gcodes\OrcaSlicer_Beta.gcode",
             @"Gcodes\BambuStudio.gcode",
             @"Gcodes\PrusaSlicer2.gcode",
@@ -16,7 +15,7 @@ namespace GcodeSharpParser.Test
             @"Gcodes\FlashForge.gcode",
             @"Gcodes\IdeaMaker.gcode",
             @"Gcodes\Simplify3D.gcode",
-        };
+        ];
 
         [Fact]
         public async Task ParseGcodesAsync()
