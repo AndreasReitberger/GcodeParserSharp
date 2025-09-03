@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net8</TargetFramework>
     <Id>GcodeParserSharp.Maui</Id>
     <AssemblyName>GcodeParserSharp.Maui</AssemblyName>
     <RootNamespace>AndreasReitberger.Parser.Gcode</RootNamespace>
@@ -12,8 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview" />
-    <PackageReference Include="RCoreSharp" Version="1.0.9" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview2" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
