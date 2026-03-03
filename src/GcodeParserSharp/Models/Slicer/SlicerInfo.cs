@@ -9,27 +9,29 @@ namespace AndreasReitberger.Parser.Gcode.Slicer
     {
         #region Properties
         [ObservableProperty]
-        Guid id;
-        [ObservableProperty]
-        SlicerName slicerName = SlicerName.Unkown;
+        public partial Guid Id { get; set; }
 
         [ObservableProperty]
-        string installationPath;
+        public partial SlicerName SlicerName { get; set; } = SlicerName.Unkown;
 
         [ObservableProperty]
-        string downloadUri;
+        public partial string InstallationPath { get; set; }
+
         [ObservableProperty]
-        string repositoryUri;
+        public partial string DownloadUri { get; set; }
+
+        [ObservableProperty]
+        public partial string RepositoryUri { get; set; }
         #endregion
 
         #region Override
         public override string ToString() =>  SlicerName.ToString();
         
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not SlicerInfo item)
                 return false;
-            return Id.Equals(item.Id) || (this.SlicerName == item.SlicerName);
+            return Id.Equals(item.Id) || (SlicerName == item.SlicerName);
         }
         public override int GetHashCode() => Id.GetHashCode();
         

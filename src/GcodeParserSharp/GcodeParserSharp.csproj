@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\common.props" />
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
+    <TargetFramework>net8</TargetFramework>
     <Id>GcodeParserSharp.Maui</Id>
     <AssemblyName>GcodeParserSharp.Maui</AssemblyName>
     <RootNamespace>AndreasReitberger.Parser.Gcode</RootNamespace>
@@ -9,15 +9,15 @@
     <PackageTags>Gcode, Parser, Sharp, Printtime, Filament, Volume</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+	<LangVersion>Preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview" />
-    <PackageReference Include="RCoreSharp" Version="1.0.9" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview2" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.103" />
   </ItemGroup>
 </Project>

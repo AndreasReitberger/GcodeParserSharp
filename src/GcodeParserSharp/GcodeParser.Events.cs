@@ -6,7 +6,7 @@ namespace AndreasReitberger.Parser.Gcode
     public partial class GcodeParser
     {
         #region EventHandlers
-        public event EventHandler Error;
+        public event EventHandler? Error;
         protected virtual void OnError()
         {
             Error?.Invoke(this, EventArgs.Empty);
