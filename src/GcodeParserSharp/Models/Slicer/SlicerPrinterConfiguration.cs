@@ -39,7 +39,7 @@ namespace AndreasReitberger.Parser.Gcode.Slicer
 
         #region Overrides
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not SlicerPrinterConfiguration item)
                 return false;

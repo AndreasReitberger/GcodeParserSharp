@@ -19,7 +19,7 @@ namespace AndreasReitberger.Parser.Gcode
     public partial class GcodeParser : BaseModel
     {
         #region Instance
-        static GcodeParser _instance = null;
+        static GcodeParser? _instance = null;
         static readonly object Lock = new();
         public static GcodeParser Instance
         {
@@ -128,7 +128,7 @@ namespace AndreasReitberger.Parser.Gcode
         #region Methods
 
         #region Public
-        public async Task<Gcode> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration config = null)
+        public async Task<Gcode> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
         {
             if (config != null)
             {
@@ -136,7 +136,7 @@ namespace AndreasReitberger.Parser.Gcode
             }
             return await ParseGcodeAsync(new Gcode(filePath), prog, cancellationToken, useCommentRead).ConfigureAwait(false);
         }
-        public async Task<Gcode> FromGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration config = null)
+        public async Task<Gcode> FromGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
         {
             if (config != null)
             {
@@ -198,7 +198,7 @@ namespace AndreasReitberger.Parser.Gcode
         #endregion
 
         #region Private
-        async Task<Gcode> ParseGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead)
+        async Task<Gcode?> ParseGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead)
         {
             try
             {
@@ -381,7 +381,7 @@ namespace AndreasReitberger.Parser.Gcode
                 }
 
                 gcode.SlicerName = GetSlicerNameFromLines([.. comments.Take(30)]);
-                SlicerInfo slicers = SupportedSlicers?.FirstOrDefault(slicer => slicer.SlicerName == gcode.SlicerName);
+                SlicerInfo? slicers = SupportedSlicers?.FirstOrDefault(slicer => slicer.SlicerName == gcode.SlicerName);
 
                 // 29708.853619192618
                 gcode.Comments = [.. comments];

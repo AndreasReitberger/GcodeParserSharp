@@ -22,112 +22,112 @@ namespace AndreasReitberger.Parser.Gcode
 
         #region General
         [ObservableProperty]
-        Guid id = Guid.Empty;
+        public partial Guid Id { get; set; } = Guid.Empty;
 
         [ObservableProperty]
-        bool isValid = false;
+        public partial bool IsValid { get; set; } = false;
 
         [ObservableProperty]
-        bool isOctoPrintGcodeAnalysis = false;
+        public partial bool IsOctoPrintGcodeAnalysis { get; set; } = false;
 
         [ObservableProperty]
-        bool isWorking = false;
+        public partial bool IsWorking { get; set; } = false;
 
         [ObservableProperty]
-        int progress = 0;
+        public partial int Progress { get; set; } = 0;
 
         [ObservableProperty]
-        int processOrder = 0;
+        public partial int ProcessOrder { get; set; } = 0;
 
         #endregion
 
         #region Thumbnails
         [ObservableProperty]
-        List<byte[]> thumbnails = new();
+        public partial List<byte[]> Thumbnails { get; set; } = [];
         #endregion
 
         #region ParserInformation
         [ObservableProperty]
-        TimeSpan parsingDuration;
+        public partial TimeSpan ParsingDuration { get; set; }
 
         [ObservableProperty]
-        Dictionary<double, int> zHeights = new();
+        public partial Dictionary<double, int> ZHeights { get; set; } = [];
 
         #endregion
 
         #region GcodeInformation
         [ObservableProperty]
-        SlicerName slicerName = SlicerName.Unkown;
+        public partial SlicerName SlicerName { get; set; } = SlicerName.Unkown;
 
         [ObservableProperty]
-        string fileName;
+        public partial string FileName { get; set; } = string.Empty;
 
         [ObservableProperty]
-        string filePath;
+        public partial string FilePath { get; set; } = string.Empty;
 
         [ObservableProperty]
-        bool layerModelGenerated = false;
+        public partial bool LayerModelGenerated { get; set; } = false;
 
         [ObservableProperty]
-        List<double> filamentUsage = new();
+        public partial List<double> FilamentUsage { get; set; } = [];
 
         [ObservableProperty]
-        List<double> filamentDiameters = new();
+        public partial List<double> FilamentDiameters { get; set; } = [];
 
         [ObservableProperty]
-        List<double> filamentDensities = new();
+        public partial List<double> FilamentDensities { get; set; } = [];
 
         [ObservableProperty]
-        List<double> nozzleDiameters = new();
+        public partial List<double> NozzleDiameters { get; set; } = [];
 
         [ObservableProperty]
-        double filamentUsed = 0;
+        public partial double FilamentUsed { get; set; } = 0;
 
         [ObservableProperty]
-        double filamentDiameter = 1.75f;
+        public partial double FilamentDiameter { get; set; } = 1.75f;
 
         [ObservableProperty]
-        double extrudedFilamentVolume;
+        public partial double ExtrudedFilamentVolume { get; set; }
 
         [ObservableProperty]
-        double printTime;
+        public partial double PrintTime { get; set; }
 
         [ObservableProperty]
-        string filamentType;
+        public partial string FilamentType { get; set; } = string.Empty;
 
         [ObservableProperty]
-        List<string> filamentTypes = new();
+        public partial List<string> FilamentTypes { get; set; } = [];
 
         [ObservableProperty]
-        double filamentDensity;
+        public partial double FilamentDensity { get; set; }
 
         [ObservableProperty]
-        double filamentWeight;
+        public partial double FilamentWeight { get; set; }
 
         [ObservableProperty]
-        double nozzleDiameter;
+        public partial double NozzleDiameter { get; set; }
 
         [ObservableProperty]
-        double width = 0;
+        public partial double Width { get; set; } = 0;
 
         [ObservableProperty]
-        double depth = 0;
+        public partial double Depth { get; set; } = 0;
 
         [ObservableProperty]
-        double height = 0;
+        public partial double Height { get; set; } = 0;
 
         [ObservableProperty]
-        int layers = 0;
+        public partial int Layers { get; set; } = 0;
 
         #endregion
 
         #region Commands & Comments
 
         [ObservableProperty]
-        List<List<GcodeCommandLine>> commands = new();
+        public partial List<List<GcodeCommandLine>> Commands { get; set; } = [];
 
         [ObservableProperty]
-        List<string> comments = new();
+        public partial List<string> Comments { get; set; } = [];
         #endregion
 
 #if NETFRAMEWORK || (NET6_0_OR_GREATER && USE_HELIX)
@@ -179,20 +179,16 @@ namespace AndreasReitberger.Parser.Gcode
         #endregion
 
         #region Overrides
-        public override string ToString()
-        {
-            return FileName;
-        }
-        public override bool Equals(object obj)
+        public override string ToString() => FileName;
+        
+        public override bool Equals(object? obj)
         {
             if (obj is not Gcode item)
                 return false;
             return Id.Equals(item.Id);
         }
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() =>  Id.GetHashCode();
+        
         #endregion
     }
 }
