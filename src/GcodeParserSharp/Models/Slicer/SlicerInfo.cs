@@ -1,11 +1,10 @@
-﻿using AndreasReitberger.Core.Utilities;
-using AndreasReitberger.Parser.Gcode.Enums;
+﻿using AndreasReitberger.Parser.Gcode.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace AndreasReitberger.Parser.Gcode.Slicer
 {
-    public partial class SlicerInfo : BaseModel
+    public partial class SlicerInfo : ObservableObject
     {
         #region Properties
         [ObservableProperty]

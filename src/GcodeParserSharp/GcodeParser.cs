@@ -1,5 +1,4 @@
 ﻿using AndreasReitberger.API.OctoPrint.Models;
-using AndreasReitberger.Core.Utilities;
 using AndreasReitberger.Parser.Gcode.Enums;
 using AndreasReitberger.Parser.Gcode.Slicer;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AndreasReitberger.Parser.Gcode
 {
-    public partial class GcodeParser : BaseModel
+    public partial class GcodeParser : ObservableObject
     {
         #region Instance
         static GcodeParser? _instance = null;
@@ -47,7 +46,7 @@ namespace AndreasReitberger.Parser.Gcode
         #endregion
 
         #region Regex
-
+#if NET6_0_OR_GREATER
         [GeneratedRegex(@"^((\d+((\.|\,)\d+)?)|((\.|\,)\d+))$")]
         public static partial Regex DecimalPrintTimeRegex();
 
@@ -94,6 +93,7 @@ namespace AndreasReitberger.Parser.Gcode
         //[GeneratedRegex(@"([^ =\s](\d*.\d\d))|([^ =\s](\d*.\d{1,2}))")]
         [GeneratedRegex(@"([^ =\s](\d*.\d{1,2}))")]
         public static partial Regex NumericValueAfterEqualRegex();
+#endif
         #endregion
 
         #region Properties
@@ -128,7 +128,7 @@ namespace AndreasReitberger.Parser.Gcode
         #region Methods
 
         #region Public
-        public async Task<Gcode> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
+        public async Task<Gcode?> FromFileAsync(string filePath, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
         {
             if (config != null)
             {
@@ -136,64 +136,13 @@ namespace AndreasReitberger.Parser.Gcode
             }
             return await ParseGcodeAsync(new Gcode(filePath), prog, cancellationToken, useCommentRead).ConfigureAwait(false);
         }
-        public async Task<Gcode> FromGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
+        public async Task<Gcode?> FromGcodeAsync(Gcode gcode, IProgress<int> prog, CancellationToken cancellationToken, bool useCommentRead = false, SlicerPrinterConfiguration? config = null)
         {
             if (config != null)
             {
                 Config = config;
             }
             return await ParseGcodeAsync(gcode, prog, cancellationToken, useCommentRead).ConfigureAwait(false);
-        }
-
-        public Gcode FromOctoPrintFile(OctoPrintFile file)
-        {
-            var temp = new Gcode(file);
-            if (file.GcodeAnalysis == null)
-            {
-                temp.IsValid = false;
-                return temp;
-            }
-
-            double volume = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Volume), 2);
-            double length = Math.Round(file.GcodeAnalysis.Filament.Select(tool => tool.Value).Sum(filament => filament.Length), 2);
-
-            temp.Width = (float)Math.Round(file.GcodeAnalysis.Dimensions.Width, 2);
-            temp.Height = (float)Math.Round(file.GcodeAnalysis.Dimensions.Height, 2);
-            temp.Depth = (float)Math.Round(file.GcodeAnalysis.Dimensions.Depth, 2);
-
-            if (file.Statistics != null)
-            {
-                if (file.Statistics.AveragePrintTime != null && file.Statistics.AveragePrintTime.DefaultValue > 0)
-                    temp.PrintTime = Math.Round(file.Statistics.AveragePrintTime.DefaultValue / 3600, 2);
-                else
-                    temp.PrintTime = Math.Round(file.GcodeAnalysis.EstimatedPrintTime / 3600, 2);
-            }
-            else
-                temp.PrintTime = Math.Round(file.GcodeAnalysis.EstimatedPrintTime / 3600, 2);
-
-            temp.ExtrudedFilamentVolume = volume;
-            temp.FilamentUsed = length;
-
-            temp.IsValid = true;
-            return temp;
-        }
-
-        public string CommandsToText(Gcode gcode)
-        {
-            List<List<GcodeCommandLine>> cmds = gcode.Commands;
-            StringBuilder sb = new();
-            for (int i = 0; i < cmds.Count; i++)
-            {
-                List<GcodeCommandLine> list = cmds[i];
-                sb.AppendLine($"Layer: {i}");
-                for (int j = 0; j < list.Count; j++)
-                {
-                    GcodeCommandLine cmd = list[j];
-                    sb.AppendLine($"{j}: x = {cmd.X} / y = {cmd.Y} / x = {cmd.X} | px = {cmd.PrevX} / py = {cmd.PrevY} / pz = {cmd.PrevZ} |" +
-                        $"{(cmd.IsExtruding ? $"{cmd.Extruder} = {cmd.Extrusion} / " : "")} retract = {cmd.Retract} / speed = {cmd.Speed} ");
-                }
-            }
-            return sb.ToString();
         }
         #endregion
 

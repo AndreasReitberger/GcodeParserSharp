@@ -10,14 +10,19 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 	<LangVersion>Preview</LangVersion>
+	<DefineConstants>$(DefineConstants);USE_HELIX</DefineConstants>	  
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview2" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.103" />
+    <PackageReference Include="HelixToolkit.Maths" Version="3.1.2" />
+    <PackageReference Include="HelixToolkit.SharpDX" Version="3.1.2" />
+    <PackageReference Include="HelixToolkit.SharpDX.Assimp" Version="3.1.2" />
+    <PackageReference Include="OctoPrintSharpApi" Version="1.2.3-preview3" />
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.103" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
