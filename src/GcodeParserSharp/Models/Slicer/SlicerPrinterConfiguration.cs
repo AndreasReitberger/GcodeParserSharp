@@ -1,9 +1,8 @@
-﻿using AndreasReitberger.Core.Utilities;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AndreasReitberger.Parser.Gcode.Slicer
 {
-    public partial class SlicerPrinterConfiguration : BaseModel
+    public partial class SlicerPrinterConfiguration : ObservableObject
     {
         #region  Default
         public static SlicerPrinterConfiguration Default = new()

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\common.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net472;net6</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net48;net6</TargetFrameworks>
     <AssemblyName>GcodeParserSharp</AssemblyName>
     <RootNamespace>AndreasReitberger.Parser.Gcode</RootNamespace>
     <Description>A simple C# Gcode parser to read gcodes and get out the filament volume and estimated print time.</Description>
@@ -17,8 +17,8 @@
     <Compile Include="..\..\..\src\GcodeParserSharp\Enums\SlicerParameter.cs" Link="Enums\SlicerParameter.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.cs" Link="GcodeParser.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Events.cs" Link="GcodeParser.Events.cs" />
-    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Extension.cs" Link="GcodeParser.Extension.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Regex.cs" Link="GcodeParser.Regex.cs" />
+    <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParser.Static.cs" Link="GcodeParser.Static.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\GcodeParserGlobalStaticConfig.cs" Link="GcodeParserGlobalStaticConfig.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\Models\Gcode.cs" Link="Models\Gcode.cs" />
     <Compile Include="..\..\..\src\GcodeParserSharp\Models\GcodeCommandLine.cs" Link="Models\GcodeCommandLine.cs" />
@@ -26,15 +26,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HelixToolkit" Version="2.24.0" />
+    <PackageReference Include="HelixToolkit" Version="3.1.2" />
     <PackageReference Include="HelixToolkit.SharpDX.Core.Assimp.Wrapper" Version="1.1.1" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
-    <PackageReference Include="HelixToolkit.Wpf" Version="2.24.0" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.24.0" Condition="$(TargetFramework.StartsWith('net4'))" />
-    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.24.0" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
-    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.24.0" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
+    <PackageReference Include="HelixToolkit.Wpf" Version="3.1.2" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="3.1.2" Condition="$(TargetFramework.StartsWith('net4'))" />
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.27.3" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
+    <PackageReference Include="HelixToolkit.SharpDX.Core.Wpf" Version="2.27.3" Condition="$(TargetFramework.StartsWith('net6')) or $(TargetFramework.StartsWith('net7'))" />
     <PackageReference Include="OctoPrintSharpApi" Version="1.2.2" />
-    <PackageReference Include="RCoreSharp" Version="1.0.9" />
     <None Include="..\..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="10.0.103" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="SharedNetCoreLibrary">
+      <Version>1.2.5</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6'">
+    <PackageReference Include="SharedNetCoreLibrary">
+      <Version>1.2.5</Version>
+    </PackageReference>
   </ItemGroup>
 	<!-- Now added as nuget
   <ItemGroup>

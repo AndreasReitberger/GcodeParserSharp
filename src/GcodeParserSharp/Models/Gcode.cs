@@ -1,22 +1,23 @@
 ﻿using AndreasReitberger.Parser.Gcode.Enums;
-using AndreasReitberger.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using AndreasReitberger.API.OctoPrint.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 
+
 #if NETFRAMEWORK
 using HelixToolkit.Wpf;
 using HelixToolkit.Wpf.SharpDX;
 #elif NET6_0_OR_GREATER && USE_HELIX
-using HelixToolkit.Wpf;
+using HelixToolkit.SharpDX;
+//using HelixToolkit.Wpf;
 using HelixToolkit.SharpDX.Core;
 #endif
 
 namespace AndreasReitberger.Parser.Gcode
 {
-    public partial class Gcode : BaseModel
+    public partial class Gcode : ObservableObject
     {
         #region Properties
 
@@ -132,12 +133,13 @@ namespace AndreasReitberger.Parser.Gcode
 
 #if NETFRAMEWORK || (NET6_0_OR_GREATER && USE_HELIX)
         #region Model
+        /*
+        [ObservableProperty]
+        public partial List<LinesVisual3D> ModelLayers { get; set; } = [];
+        */
 
         [ObservableProperty]
-        List<LinesVisual3D> modelLayers = new();
-
-        [ObservableProperty]
-        List<LineBuilder> model3d = new();
+        public partial List<LineBuilder> Model3d { get; set; } = [];
 
         #endregion
 #endif
